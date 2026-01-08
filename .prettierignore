@@ -1,0 +1,25 @@
+# Next.js
+.next
+out
+build
+
+# Dependencies
+node_modules
+
+# Env & config
+.env
+.env.*
+*.env
+
+# Lockfiles (optional – many teams ignore these)
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Generated / build artifacts
+coverage
+dist
+*.log
+
+# Public assets (optional – ignore if you don't want formatting)
+public
