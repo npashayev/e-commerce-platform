@@ -1,8 +1,26 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 :root {
   --background: #ffffff;
   --foreground: #171717;
+
+  /* index variables */
+  --toast-index: 102;
+  --modal-index: 101;
+  --navbar-index: 100;
+  --liked-products-index: 99;
+  --navigation-sidebar-index: 98;
+  --categories-sidebar-index: 97;
+  --filter-bar-index: 96;
+
+  /* other variables */
+  --navbar-height: 55px;
+}
+
+@layer components {
+  button {
+    @apply hover:cursor-pointer;
+  }
 }
 
 @theme inline {
@@ -12,12 +30,12 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
-}
+} */
 
 body {
   background: var(--background);
