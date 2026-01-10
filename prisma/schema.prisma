@@ -1,0 +1,157 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  firstName   String
+  lastName    String
+  maidenName  String?
+  age         Int
+  gender      String
+  email       String   @unique
+  phone       String
+  username    String   @unique
+  password    String
+  birthDate   String
+  image       String
+  bloodGroup  String
+  height      Float
+  weight      Float
+  eyeColor    String
+  hair        Hair?
+  ip          String
+  address     Address?
+  macAddress  String
+  university  String
+  bank        Bank?
+  company     Company?
+  ein         String
+  ssn         String
+  userAgent   String
+  crypto      Crypto?
+  role        String
+  reviews     Review[]
+  
+  @@map("users")
+}
+
+model Category {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  slug     String @unique
+  name     String
+  url      String
+  
+  @@map("categories")
+}
+
+model Product {
+  id                   String      @id @default(auto()) @map("_id") @db.ObjectId
+  title                String
+  description          String
+  category             String
+  price                Float
+  discountPercentage   Float
+  rating               Float
+  stock                Int
+  tags                 String[]
+  brand                String
+  sku                  String      @unique
+  weight               Float
+  dimensions           Dimensions?
+  warrantyInformation  String
+  shippingInformation  String
+  availabilityStatus   String
+  returnPolicy         String
+  minimumOrderQuantity Int
+  meta                 Meta?
+  images               String[]
+  thumbnail            String
+  reviews              Review[]
+  
+  @@map("products")
+}
+
+model Review {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  productId     String   @db.ObjectId
+  product       Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  userId        String   @db.ObjectId
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  rating        Int
+  comment       String
+  date          String
+  reviewerName  String
+  reviewerEmail String
+  
+  @@map("reviews")
+}
+
+type Hair {
+  color String
+  type  String
+}
+
+type Address {
+  address     String
+  city        String
+  state       String
+  stateCode   String
+  postalCode  String
+  coordinates Coordinates?
+  country     String
+}
+
+type Coordinates {
+  lat Float
+  lng Float
+}
+
+type Bank {
+  cardExpire String
+  cardNumber String
+  cardType   String
+  currency   String
+  iban       String
+}
+
+type Company {
+  department String
+  name       String
+  title      String
+  address    CompanyAddress?
+}
+
+type CompanyAddress {
+  address     String
+  city        String
+  state       String
+  stateCode   String
+  postalCode  String
+  coordinates Coordinates?
+  country     String
+}
+
+type Crypto {
+  coin    String
+  wallet  String
+  network String
+}
+
+type Dimensions {
+  width  Float
+  height Float
+  depth  Float
+}
+
+type Meta {
+  createdAt String
+  updatedAt String
+  barcode   String
+  qrCode    String
+}
