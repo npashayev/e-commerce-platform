@@ -1,0 +1,191 @@
+@mixin inputActive {
+  top: -5px;
+  font-size: 0.75rem;
+  color: #007bff;
+  background-color: #f4f4f9;
+}
+
+.form {
+  font-size: 1rem;
+  width: 400px;
+  border-radius: 1.87rem;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.25);
+  padding: 3.12rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: white;
+
+  .formHeaderText {
+    font-size: 2rem;
+    margin-bottom: 1.87rem;
+    color: #333;
+    text-align: center;
+  }
+
+  .inputField {
+    margin-bottom: 20px;
+
+    .inputCnr {
+      position: relative;
+      font-size: 1rem;
+
+      input {
+        width: 100%;
+        padding: 0.87rem 3.12rem 0.87em 0.93rem;
+        border-radius: 0.75rem;
+        outline: none;
+        border: 1px solid #999;
+        transition: border-color 0.2s ease-in-out;
+        font-size: 1rem;
+
+        &:focus {
+          border-color: #007bff;
+        }
+
+        &:focus ~ label,
+        & ~ .submitting,
+        &:is(:-webkit-autofill, :autofill) ~ label {
+          @include inputActive;
+        }
+      }
+
+      label {
+        padding: 0.1875rem;
+        position: absolute;
+        top: 50%;
+        left: 1.125rem;
+        transform: translateY(-50%);
+        color: #666;
+        pointer-events: none;
+        transition: all 0.2s ease-in-out;
+        border-radius: 5px;
+      }
+
+      .toggleBtn {
+        display: flex;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 15px;
+        color: #555;
+        font-size: 1rem;
+      }
+    }
+
+    .filled {
+      label {
+        @include inputActive;
+      }
+    }
+
+    .loginInputCnr {
+      input {
+        &:valid ~ label {
+          @include inputActive;
+        }
+      }
+    }
+  }
+
+  .buttonsCnr {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9375rem;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+    .btn {
+      font-size: 1rem;
+      padding: 0.5rem 3.75rem;
+      border-radius: 1000px;
+      border: 0.5px solid #ccc;
+      background-color: #f4f4f9;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &:hover {
+        z-index: 0;
+        color: white;
+        border-color: transparent;
+      }
+
+      &:active {
+        scale: 0.99;
+      }
+
+      &:active::after {
+        background-image: linear-gradient(to top left, #0264b4, #861296);
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        border-radius: inherit;
+        background-image: linear-gradient(to bottom right, #008cff, #e100ff);
+        z-index: -1;
+      }
+    }
+  }
+
+  .linkCnr {
+    font-size: 1rem;
+    text-align: center;
+    margin-top: 1.25rem;
+
+    .link {
+      color: #1d4ed8;
+      text-decoration: underline;
+
+      &:hover {
+        color: rgb(16, 50, 145);
+      }
+    }
+  }
+
+  .getAccountCnr {
+    text-align: center;
+    margin-top: 0.5rem; // 8px (was 0.8rem)
+
+    .getAccountBtn {
+      font-size: 1rem; // 16px (was 1.6rem)
+      color: #1d4ed8;
+      text-decoration: underline;
+
+      &:hover {
+        color: rgb(16, 50, 145);
+      }
+    }
+  }
+}
+
+.registerForm {
+  width: 460px;
+}
+
+.error {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+  text-align: left;
+}
+
+.responseError {
+  text-align: center;
+  margin-bottom: 5px;
+  text-align: left;
+}
+
+@media (max-width: 500px) {
+  .form {
+    padding: 3.75rem 1.5625rem;
+    width: clamp(320px, 90%, 400px);
+    box-shadow: none;
+    flex-shrink: 0;
+  }
+}
