@@ -19,7 +19,6 @@ export async function getAllProducts(params: GetProductsParams = {}) {
     const where: Prisma.ProductWhereInput = {};
 
     if (category && category !== 'all') {
-      // FIX: Added mode: 'insensitive' for MongoDB
       where.category = { equals: category, mode: 'insensitive' };
     }
 
