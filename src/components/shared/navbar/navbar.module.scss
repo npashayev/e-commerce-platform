@@ -1,0 +1,118 @@
+.navbar {
+  height: 55px;
+  padding-inline: max(1.6vw, 15px);
+  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid lightgrey;
+  background-color: white;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: var(--navbar-index);
+
+  .left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 600;
+
+    .logo {
+      height: 35px;
+    }
+  }
+
+  .menuIcon {
+    display: none;
+    font-size: 1.8rem;
+  }
+
+  .right {
+    height: 100%;
+    background-color: white;
+
+    .rightItemsCnr {
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+      height: 100%;
+
+      .smallScreenDropdown {
+        width: 100%;
+        display: none;
+      }
+
+      .navigation {
+        .linksCnr {
+          display: flex;
+          gap: 20px;
+
+          .link {
+            &:hover {
+              color: rgb(173, 131, 23);
+            }
+          }
+
+          .active {
+            font-weight: 600;
+          }
+        }
+      }
+
+      .userActionBtns {
+        height: 100%;
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+}
+
+@media (max-width: 760px) {
+  .navbar {
+    .menuIcon {
+      display: block;
+    }
+
+    .right {
+      min-width: 280px;
+      position: fixed;
+      top: var(--navbar-height);
+      left: 100%;
+      padding: 2rem 2.5rem;
+      overflow: auto;
+      height: calc(100vh - var(--navbar-height));
+      border-left: 1px solid lightgray;
+      transition: transform 0.3s ease-in-out;
+      z-index: var(--navigation-sidebar-index);
+
+      .rightItemsCnr {
+        flex-direction: column-reverse;
+        align-items: flex-end;
+        gap: 3rem;
+        height: auto;
+
+        .smallScreenDropdown {
+          display: block;
+        }
+
+        .navigation {
+          .linksCnr {
+            flex-direction: column;
+            align-items: flex-end;
+          }
+        }
+
+        .userActionBtns {
+          height: auto;
+        }
+      }
+    }
+
+    .activeRight {
+      transform: translateX(-100%);
+    }
+  }
+}
