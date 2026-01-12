@@ -83,7 +83,7 @@ model Product {
   rating               Float
   stock                Int
   tags                 String[]
-  brand                String
+  brand                String?
   sku                  String      @unique
   weight               Float
   dimensions           Dimensions?
