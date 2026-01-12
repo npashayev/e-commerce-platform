@@ -1,0 +1,248 @@
+.product {
+    position: relative;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+    border-radius: 0.6rem;
+    overflow: hidden;
+    transition: transform 0.1s linear;
+    background-color: white;
+    font-size: 1.6rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+
+    &:hover {
+        transform: scale(1.03);
+    }
+
+    .heading {
+        width: 100%;
+        font-weight: 600;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        min-height: 1lh;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .brand {
+            max-width: calc(100% - 6rem);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            min-height: 1lh;
+        }
+
+        .likeBtn {
+            border-radius: 50%;
+        }
+    }
+
+    .discountPercentage {
+        color: white;
+        font-size: 14px;
+        background-color: #D1001F;
+        font-weight: 600;
+        width: max-content;
+        min-width: 50px;
+        aspect-ratio: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        position: absolute;
+        top: 20%;
+        left: 10%;
+        z-index: 1;
+    }
+
+    .imageCnr {
+        position: relative;
+        margin-top: 1rem;
+        width: 100%;
+        aspect-ratio: 1;
+        overflow: hidden;
+
+        .image {
+            display: none;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .activeImage {
+            display: block;
+            animation: slideIn 0.5s ease-in-out;
+        }
+
+        .arrowBtnCnr {
+            position: absolute;
+            display: none;
+            justify-content: space-between;
+            width: 100%;
+            left: 0;
+            top: 50%;
+            padding-inline: 3px;
+
+            .arrowBtn {
+                border: 1px solid lightgray;
+                height: 2.8rem;
+                aspect-ratio: 1;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 0.4rem;
+                transition: border-color 0.1s ease-in-out;
+                backdrop-filter: blur(1px);
+                background-color: rgba(255, 255, 255, 0.15);
+                color: rgb(80, 80, 80);
+                z-index: 2;
+
+                &:hover {
+                    border-color: rgb(80, 80, 80);
+
+                    .arrowIcon {
+                        transform: scale(1.05);
+                    }
+                }
+
+                .arrowIcon {
+                    font-size: 1.6rem;
+                }
+            }
+        }
+    }
+
+    .circleCnr {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        padding: 1rem;
+        gap: 0.5rem;
+
+        .circle {
+            height: 1rem;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            border: 1px solid lightgray;
+        }
+
+        .activeCircle {
+            background-color: #3b6952;
+        }
+    }
+
+    .info {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 1rem;
+        padding-top: 1.5rem;
+
+        .titleCnr {
+
+            .title {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                font-weight: 500;
+            }
+
+            .ratingCnr {
+                margin-top: 5px;
+                width: max-content;
+                display: flex;
+                gap: 4px;
+                align-items: flex-end;
+                font-size: 12.5px;
+
+                .rating {
+                    line-height: 1;
+                }
+
+                .starsCnr {
+                    display: flex;
+                    overflow: hidden;
+                }
+            }
+        }
+
+        .footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            .priceCnr {
+                font-style: italic;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+
+                .oldPrice {
+                    text-decoration: line-through;
+                    opacity: 0.7;
+                    font-size: 1.5rem;
+                }
+
+                .newPrice {
+                    color: darkred;
+                    font-weight: 600;
+                }
+            }
+
+            .addToCartBtn {
+                padding: 1rem;
+                border-radius: 1rem;
+                aspect-ratio: 1;
+                background-color: #E28513;
+
+                &:hover {
+                    background-color: #bd6d0c;
+                }
+
+                &:active {
+                    background-color: #a15d09;
+                }
+            }
+        }
+    }
+
+
+    &:hover {
+        .imageCnr {
+            .arrowBtnCnr {
+                display: flex;
+            }
+        }
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0.5;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@media (max-width: 600px) {
+    .product {
+        font-size: 12px;
+
+        &:hover {
+            box-shadow: 0 0 6px rgba(0, 0, 0, 0.35);
+        }
+
+        .discountPercentage {
+            font-size: 12px;
+            min-width: 40px;
+        }
+    }
+}
