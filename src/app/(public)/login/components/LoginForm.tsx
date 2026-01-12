@@ -1,6 +1,6 @@
 'use client';
 
-import styles from './login-register-form.module.scss';
+import styles from '@/styles/login-register-form.module.scss';
 import Link from 'next/link';
 import { useActionState, useEffect } from 'react';
 import toast from 'react-hot-toast';
