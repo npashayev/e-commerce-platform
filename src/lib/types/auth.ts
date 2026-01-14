@@ -13,6 +13,3 @@ export type AuthActionState = {
   generalError?: string;
 } | null;
 
-export type SigninActionState = AuthActionState & {
-  user?: SafeUser;
-};

@@ -2,29 +2,54 @@
 
 import styles from '@/styles/login-register-form.module.scss';
 import Link from 'next/link';
-import { useActionState, useEffect } from 'react';
+import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
-import { signinAction } from '@/app/actions/auth/signinAction';
+import { signIn } from 'next-auth/react';
 
 const LoginForm = () => {
-  const [state, formAction, isPending] = useActionState(signinAction, null);
+  const [isPending, setIsPending] = useState(false);
+  const [errors, setErrors] = useState<{ email?: string; password?: string; general?: string }>({});
   const router = useRouter();
 
-  useEffect(() => {
-    if (state?.success && state.user) {
-      localStorage.setItem('user', JSON.stringify(state.user));
-      toast.success('Logged in successfully!');
-      router.push('/'); // Change route as needed
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsPending(true);
+    setErrors({});
+
+    const formData = new FormData(e.currentTarget);
+    const email = formData.get('email') as string;
+    const password = formData.get('password') as string;
+
+    try {
+      const result = await signIn('credentials', {
+        email,
+        password,
+        redirect: false,
+      });
+
+      if (result?.error) {
+        setErrors({ general: 'Invalid email or password' });
+        toast.error('Login failed!');
+      } else {
+        toast.success('Logged in successfully!');
+        router.push('/');
+        router.refresh(); // Refresh to update session
+      }
+    } catch (error) {
+      setErrors({ general: 'An error occurred. Please try again.' });
+      toast.error('Login failed!');
+    } finally {
+      setIsPending(false);
     }
-  }, [state, router]);
+  };
 
   return (
-    <form action={formAction} className={`${styles.form} ${styles.loginForm}`}>
+    <form onSubmit={handleSubmit} className={`${styles.form} ${styles.loginForm}`}>
       <h1 className={styles.formHeaderText}>Login</h1>
 
       {/* General error */}
-      {state?.generalError && <div className={`${styles.error} ${styles.responseError}`}>{state.generalError}</div>}
+      {errors.general && <div className={`${styles.error} ${styles.responseError}`}>{errors.general}</div>}
 
       {/* Email */}
       <div className={styles.inputField}>
@@ -32,8 +57,8 @@ const LoginForm = () => {
           <input type="email" name="email" disabled={isPending} required />
           <label>Email</label>
         </div>
-        {state?.fieldErrors?.email && (
-          <div className={`${styles.error} ${styles.responseError}`}>{state.fieldErrors.email[0]}</div>
+        {errors.email && (
+          <div className={`${styles.error} ${styles.responseError}`}>{errors.email}</div>
         )}
       </div>
 
@@ -44,8 +69,8 @@ const LoginForm = () => {
           <label>Password</label>
           <button type="button" className={styles.toggleBtn}></button>
         </div>
-        {state?.fieldErrors?.password && (
-          <div className={`${styles.error} ${styles.responseError}`}>{state.fieldErrors.password[0]}</div>
+        {errors.password && (
+          <div className={`${styles.error} ${styles.responseError}`}>{errors.password}</div>
         )}
       </div>
 
