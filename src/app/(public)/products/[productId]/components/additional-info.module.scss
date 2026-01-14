@@ -1,0 +1,68 @@
+.additionalInfo {
+    width: max-content;
+
+    .headingsCnr {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        background-color: #EAECF0;
+        border-radius: 6rem;
+        padding: 0.5rem;
+        margin-bottom: 2rem;
+
+        .heading {
+            border-radius: 6rem;
+            padding: 0.6rem 2rem;
+            font-weight: 600;
+            font-size: 1.6rem;
+            transition: background-color 0.1s ease-in-out;
+
+            &:hover {
+                background-color: rgb(134, 134, 134);
+                color: white;
+            }
+        }
+
+        .activeHeading {
+            background-color: white;
+        }
+    }
+
+    .detailsCnr {
+        .detailRow {
+            font-size: 14px;
+            display: flex;
+            gap: 5rem;
+            justify-content: space-between;
+            border-bottom: 1px solid lightgrey;
+            padding: 0.7rem 1rem;
+
+            .detailName {
+                font-weight: 600;
+            }
+
+            .detailInfo {
+                text-align: right;
+            }
+        }
+    }
+}
+
+@media (max-width: 1200px) {
+    .additionalInfo {
+        width: 100%;
+    }
+}
+
+@media (max-width: 600px) {
+    .additionalInfo {
+        .headingsCnr {
+            gap: 5px;
+
+            .heading {
+                font-size: 12px;
+                padding-inline: 1rem;
+            }
+        }
+    }
+}

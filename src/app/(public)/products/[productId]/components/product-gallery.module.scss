@@ -1,0 +1,136 @@
+.productGallery {
+  flex-shrink: 0;
+  border: 1px solid lightgray;
+  border-radius: 2rem;
+  width: 54rem;
+  position: relative;
+
+  .availability {
+    width: max-content;
+    padding: 1rem 2rem;
+    border-radius: 0.5rem;
+    position: absolute;
+    right: 2rem;
+    top: 2rem;
+  }
+
+  .mainImageContainer {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1;
+    overflow: hidden;
+    border-radius: 2rem;
+
+    .mainImage {
+      background-color: white;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      user-select: none;
+    }
+  }
+
+  .galleryFooter {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem;
+    border-top: 1px solid lightgray;
+
+    .arrowButton {
+      flex-shrink: 0;
+      width: 35px;
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      border: 1px solid lightgray;
+      transition: background-color 0.1s ease-in-out;
+
+      &:hover {
+        background-color: lightgray;
+      }
+
+      .arrowIcon {
+        width: 16px;
+      }
+    }
+
+    .thumbnailsContainer {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      overflow: auto;
+      scrollbar-width: none;
+      user-select: none;
+
+      .thumbnailWrp {
+        position: relative;
+        width: clamp(55px, 10vw, 100px);
+        flex-shrink: 0;
+        aspect-ratio: 1;
+        overflow: hidden;
+        border: 1px solid lightgray;
+        border-radius: 1rem;
+        font-size: 8px;
+        overflow: hidden;
+        cursor: pointer;
+
+        .thumbnail {
+          object-fit: cover;
+          height: 100%;
+          width: 100%;
+          border: none;
+        }
+      }
+
+      .activeThumbnailWrp {
+        border: 1px solid #1a432e;
+      }
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  .productGallery {
+    width: 100%;
+
+    .galleryFooter {
+      .thumbnailsContainer {
+        max-width: 350px;
+      }
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  .productGallery {
+    .galleryFooter {
+      .thumbnailsContainer {
+        max-width: 250px;
+      }
+    }
+  }
+}
+
+@media (max-width: 450px) {
+  .productGallery {
+    .galleryFooter {
+      .thumbnailsContainer {
+        max-width: 200px;
+      }
+    }
+  }
+}
+
+@media (max-width: 380px) {
+  .productGallery {
+    .galleryFooter {
+      .thumbnailsContainer {
+        max-width: 150px;
+      }
+    }
+  }
+}

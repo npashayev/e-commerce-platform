@@ -1,0 +1,97 @@
+.infoHeading {
+  font-size: 10px;
+
+  .title {
+    font-size: 3em;
+    font-weight: 500;
+  }
+
+  .ratingCnr {
+    width: max-content;
+    display: flex;
+    gap: 0.6rem;
+    margin-top: 0.8rem;
+
+    .starsCnr {
+      display: flex;
+      overflow: hidden;
+
+      .starCnr {
+        height: 1.8em;
+        aspect-ratio: 1;
+
+        .star {
+          display: block;
+          object-fit: cover;
+          object-position: center;
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+
+    .reviewCount {
+      font-size: 2em;
+      line-height: 1;
+    }
+
+    .ratingSeparator {
+      height: 2em;
+      width: 1px;
+      background-color: lightgray;
+      margin-inline: 0.6rem;
+    }
+  }
+
+  .priceCnr {
+    margin-top: 2em;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    .oldPrice {
+      color: lightgrey;
+      text-decoration: line-through;
+      font-size: 2.4em;
+    }
+
+    .newPrice {
+      font-size: 3.2em;
+      color: #39b856;
+      font-weight: 600;
+      line-height: 1;
+      display: block;
+    }
+  }
+
+  .buttonsCnr {
+    margin-top: 2rem;
+    position: relative;
+    width: max-content;
+    height: max-content;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+
+    .addToCartBtn {
+      gap: 0.5em;
+      padding: 0.55em 1em;
+      border-radius: 0.55em;
+      background-color: red;
+
+      &:hover {
+        background-color: #cc0000;
+      }
+
+      &:active {
+        background-color: #ad0303;
+      }
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  .infoHeading {
+    font-size: 8px;
+  }
+}

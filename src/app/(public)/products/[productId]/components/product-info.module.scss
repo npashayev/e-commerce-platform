@@ -1,0 +1,30 @@
+.infoCnr {
+    .separator {
+        height: 1px;
+        background-color: lightgrey;
+        margin-block: 2.4rem;
+    }
+
+    .description {
+        font-size: 1.8rem;
+    }
+
+    .tagsHeading {
+        margin-bottom: 1rem;
+        font-weight: 600;
+        font-size: 1.8rem;
+    }
+
+    .tagsCnr {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+
+        .tag {
+            background-color: #FFF3E0;
+            border-radius: 0.5rem;
+            padding: 0.6rem 1rem;
+        }
+    }
+}

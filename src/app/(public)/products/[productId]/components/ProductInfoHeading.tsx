@@ -1,0 +1,54 @@
+import styles from './product-info-heading.module.scss';
+import star from '@/assets/star.png';
+// import AddToCartButton from '../products/AddToCartButton';
+// import LikeButton from 'components/common/products/LikeButton';
+import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Product } from '@prisma/client';
+import Image from 'next/image';
+
+interface Props {
+  product: Product;
+}
+
+const ProductInfoHeading = ({ product }: Props) => {
+  const productRating = Math.round(product.rating * 10) / 10;
+  const discountPercentage = Math.floor(product.discountPercentage);
+  const newPrice = (product.price - (product.price * product.discountPercentage) / 100).toFixed(2);
+
+  return (
+    <div className={styles.infoHeading}>
+      <div className={styles.title}>{product.title}</div>
+
+      <div className={styles.ratingCnr}>
+        <div className={styles.starsCnr} style={{ width: `${(productRating / 5) * 90}px` }}>
+          {[...Array(5)].map((_, i) => (
+            <div key={i} className={styles.starCnr}>
+              <Image src={star} alt="star" className={styles.star} />
+            </div>
+          ))}
+        </div>
+
+        <div className={styles.ratingSeparator} />
+
+        {/* <div className={styles.reviewCount}>{product?.reviews?.length} reviews</div> */}
+      </div>
+
+      <div className={styles.priceCnr}>
+        {discountPercentage > 0 && <span className={styles.oldPrice}>${product.price}</span>}
+        <span className={styles.newPrice}>${newPrice}</span>
+      </div>
+
+      {/* <div className={styles.buttonsCnr}>
+        <LikeButton product={product} />
+
+        <AddToCartButton product={product} className={styles.addToCartBtn}>
+          <FontAwesomeIcon icon={faCartShopping} className={styles.basketIcon} />
+          Add to cart
+        </AddToCartButton>
+      </div> */}
+    </div>
+  );
+};
+
+export default ProductInfoHeading;
