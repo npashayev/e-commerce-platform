@@ -1,10 +1,10 @@
 import styles from './product-details-page.module.scss';
-import ProductGallery from './ProductGallery';
 import ProductInfoHeading from './ProductInfoHeading';
 import ProductInfo from './ProductInfo';
 import Reviews from './Reviews';
 import { use } from 'react';
 import { getProductById } from '@/lib/api/products';
+import ProductGallery from './ProductGallery';
 
 interface Props {
   productId: string;
