@@ -8,7 +8,7 @@ interface BaseProps {
   required?: boolean;
 }
 
-interface InfoFieldProps extends Omit<BaseProps, 'name'> {}
+type InfoFieldProps = Pick<BaseProps, 'label' | 'value'>;
 
 interface EditFieldProps extends BaseProps {
   name: string;
