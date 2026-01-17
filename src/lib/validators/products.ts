@@ -19,4 +19,24 @@ export const updateProductSchema = z.object({
   images: z.array(z.string().url()).optional(),
 });
 
+export const createProductSchema = z.object({
+  title: z.string().min(1, "Title is required"),
+  description: z.string().min(1).optional(),
+  category: z.string().min(1, "Category is required"),
+  brand: z.string().optional(),
+  price: z.number().positive("Price must be positive"),
+  discountPercentage: z.number().min(0).max(100).optional(),
+  weight: z.number().positive().optional(),
+  width: z.number().positive().optional(),
+  height: z.number().positive().optional(),
+  depth: z.number().positive().optional(),
+  warrantyInformation: z.string().optional(),
+  shippingInformation: z.string().optional(),
+  returnPolicy: z.string().optional(),
+  minimumOrderQuantity: z.number().int().positive().optional(),
+  tags: z.array(z.string()).optional(),
+  images: z.array(z.string().url()).optional(),
+});
+
 export type UpdateProductInput = z.infer<typeof updateProductSchema>;
+export type CreateProductInput = z.infer<typeof createProductSchema>;
