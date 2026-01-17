@@ -1,329 +1,348 @@
 @mixin disabled {
-    background-color: #ccc;
-    color: #666;
-    cursor: not-allowed;
-    pointer-events: none;
-    opacity: 0.6;
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+  pointer-events: none;
+  opacity: 0.6;
 }
 
 .pageError {
-    font-size: 1.6rem;
-    margin-top: 60px;
-    text-align: center;
+  font-size: 1.6rem;
+  margin-top: 60px;
+  text-align: center;
 }
 
 .page {
-    padding-top: 60px;
+  padding-top: 60px;
 
-    .componentContainer {
-        font-size: 1.6rem;
-        margin: 3rem;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+  .componentContainer {
+    font-size: 1.6rem;
+    margin: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-        .buttonsCnr {
-            display: flex;
-            justify-content: flex-end;
-            gap: 1rem;
-            background-color: white;
-            padding: 0.8rem 3rem;
-            border-bottom: 1px solid lightgray;
-            position: fixed;
-            top: var(--navbar-height);
-            left: 0;
-            width: 100%;
-            z-index: 1;
+    .buttonsCnr {
+      display: flex;
+      justify-content: flex-end;
+      gap: 1rem;
+      background-color: white;
+      padding: 0.8rem 3rem;
+      border-bottom: 1px solid lightgray;
+      position: fixed;
+      top: var(--navbar-height);
+      left: 0;
+      width: 100%;
+      z-index: 1;
 
-            button {
-                padding: 0.8rem 1.5rem;
-                font-weight: 600;
-                border-radius: 1rem;
-                color: white;
+      button {
+        padding: 0.8rem 1.5rem;
+        font-weight: 600;
+        border-radius: 1rem;
+        color: white;
 
-                &:disabled {
-                    @include disabled
-                }
-            }
+        &:disabled {
+          @include disabled;
+        }
+      }
 
-            .editBtn {
-                background-color: green;
+      .editBtn {
+        background-color: green;
 
-                &:hover {
-                    background-color: rgb(1, 105, 1);
-                }
-
-                &:active {
-                    background-color: rgb(0, 83, 0);
-                }
-            }
-
-            .crossBtn {
-                background-color: red;
-
-                &:hover {
-                    background-color: #D32F2F;
-                }
-
-                &:active {
-                    background-color: #B71C1C;
-                }
-            }
-
-            .updateBtn {
-                background-color: green;
-
-                &:hover {
-                    background-color: rgb(1, 105, 1);
-                }
-
-                &:active {
-                    background-color: rgb(0, 83, 0);
-                }
-            }
+        &:hover {
+          background-color: rgb(1, 105, 1);
         }
 
-        .block {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            max-width: 1010px;
-            background-color: white;
-            padding: 3rem;
-            border: 1px solid lightgray;
-            border-radius: 2rem;
-            margin-bottom: 3rem;
-
-            .heading {
-                font-size: 2.2rem;
-                font-weight: 600;
-                color: #F7AA6C;
-            }
-
-            .inputGroup {
-                width: 100%;
-                margin-top: 4rem;
-                display: flex;
-                gap: 20px;
-                flex-wrap: wrap;
-                align-items: flex-end;
-
-                .selector {
-                    font-size: 1.6rem;
-                    width: 20rem;
-                }
-
-                .inputCnr {
-                    flex-grow: 1;
-
-                    label {
-                        font-weight: 600;
-                        display: block;
-                        margin-bottom: 0.8rem;
-                    }
-
-                    .textarea {
-                        width: 100%;
-                        resize: none;
-                        white-space: normal;
-                        overflow: visible;
-                        text-overflow: clip;
-                        resize: none;
-                        border: 1px solid lightgray;
-                        border-radius: 1rem;
-                        padding: 0.8rem 1.5rem;
-                        font-size: 1.6rem;
-                    }
-
-                    .info {
-                        border: 1px solid lightgray;
-                        border-radius: 1rem;
-                        padding: 0.8rem 1.5rem;
-                        flex-shrink: 0;
-                        width: 100%;
-                        min-width: 300px;
-                        min-height: 4rem;
-                        white-space: nowrap;
-                        overflow: hidden;
-                        text-overflow: ellipsis;
-                        font-size: 1.6rem;
-                    }
-
-                    .descriptionInfo {
-                        width: 100%;
-                        white-space: normal;
-                        overflow: visible;
-                        text-overflow: clip;
-                    }
-                }
-
-                .tagCnr {
-                    display: flex;
-                    flex-direction: column;
-                    gap: 2rem;
-                    width: 100%;
-
-                    label {
-                        font-weight: 600;
-                    }
-
-                    .tagsCnr {
-                        display: flex;
-                        align-items: center;
-                        flex-wrap: wrap;
-                        gap: 1rem;
-
-                        .tag {
-                            position: relative;
-                            background-color: #FFF3E0;
-                            border-radius: 0.5rem;
-                            padding: 0.6rem 1rem;
-                            padding-right: calc(1rem + 17px);
-
-                            .xBtn {
-                                position: absolute;
-                                right: 5px;
-                                top: 50%;
-                                transform: translateY(-50%);
-                                font-size: 12px;
-
-                                &:hover {
-                                    color: rgb(53, 52, 52);
-                                }
-                            }
-                        }
-                    }
-                }
-
-                .imagePicker {
-                    display: none;
-                }
-
-                .imagePickerLabel {
-                    padding: 0.5rem 1rem;
-                    color: white;
-                    border-radius: 1rem;
-                    width: max-content;
-                    cursor: pointer;
-                    background-color: #E28513;
-
-                    &:hover {
-                        background-color: #bd6d0c;
-                    }
-
-                    &:active {
-                        background-color: #a15d09;
-                    }
-                }
-
-                .addFieldCnr {
-                    display: flex;
-                    flex-wrap: wrap;
-                    gap: 1rem;
-                    align-items: center;
-
-                    .tagInput {
-                        max-width: 300px;
-                    }
-
-                    .addFieldBtn {
-                        padding: 0.8rem 1rem;
-                        color: white;
-                        border-radius: 1rem;
-                        background-color: #E28513;
-
-                        &:disabled {
-                            @include disabled
-                        }
-
-                        &:hover {
-                            background-color: #bd6d0c;
-                        }
-
-                        &:active {
-                            background-color: #a15d09;
-                        }
-                    }
-                }
-            }
-
-
-            .imageList {
-                margin-top: 3rem;
-                display: flex;
-                flex-wrap: wrap;
-                gap: 20px;
-
-                .imageCnr {
-                    position: relative;
-                    height: clamp(100px, 15vw, 200px);
-                    aspect-ratio: 1;
-                    border: 1px solid lightgrey;
-                    border-radius: 2rem;
-                    overflow: hidden;
-
-                    .image {
-                        width: 100%;
-                        height: 100%;
-                        object-fit: cover;
-                    }
-
-                    .xBtn {
-                        border: 1px solid lightgray;
-                        height: 2.5rem;
-                        width: 2.5rem;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        border-radius: 50%;
-                        position: absolute;
-                        right: 8%;
-                        top: 8%;
-                        background-color: white;
-                        cursor: pointer;
-
-                        &:hover {
-                            background-color: brown;
-                            color: white;
-                            border-color: transparent;
-                        }
-
-                        &:active {
-                            background-color: rgb(139, 31, 31);
-                        }
-
-                        .xIcon {
-                            display: block;
-                            font-size: 1.4rem;
-                        }
-                    }
-                }
-            }
+        &:active {
+          background-color: rgb(0, 83, 0);
         }
+      }
+
+      .crossBtn {
+        background-color: red;
+
+        &:hover {
+          background-color: #d32f2f;
+        }
+
+        &:active {
+          background-color: #b71c1c;
+        }
+      }
+
+      .updateBtn {
+        background-color: green;
+
+        &:hover {
+          background-color: rgb(1, 105, 1);
+        }
+
+        &:active {
+          background-color: rgb(0, 83, 0);
+        }
+      }
     }
+
+    .block {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      max-width: 1010px;
+      background-color: white;
+      padding: 3rem;
+      border: 1px solid lightgray;
+      border-radius: 2rem;
+      margin-bottom: 3rem;
+
+      .heading {
+        font-size: 2.2rem;
+        font-weight: 600;
+        color: #f7aa6c;
+      }
+
+      .inputGroup {
+        width: 100%;
+        margin-top: 4rem;
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        align-items: flex-end;
+
+        .selector {
+          font-size: 1.6rem;
+          width: 20rem;
+        }
+
+        .inputCnr {
+          flex-grow: 1;
+
+          label {
+            font-weight: 600;
+            display: block;
+            margin-bottom: 0.8rem;
+          }
+
+          .textarea {
+            width: 100%;
+            resize: none;
+            white-space: normal;
+            overflow: visible;
+            text-overflow: clip;
+            resize: none;
+            border: 1px solid lightgray;
+            border-radius: 1rem;
+            padding: 0.8rem 1.5rem;
+            font-size: 1.6rem;
+          }
+
+          .info {
+            border: 1px solid lightgray;
+            border-radius: 1rem;
+            padding: 0.8rem 1.5rem;
+            flex-shrink: 0;
+            width: 100%;
+            min-width: 300px;
+            min-height: 4rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-size: 1.6rem;
+          }
+
+          .descriptionInfo {
+            width: 100%;
+            white-space: normal;
+            overflow: visible;
+            text-overflow: clip;
+          }
+        }
+
+        .tagCnr {
+          display: flex;
+          flex-direction: column;
+          gap: 2rem;
+          width: 100%;
+
+          label {
+            font-weight: 600;
+          }
+
+          .tagsCnr {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+
+            .tag {
+              position: relative;
+              background-color: #fff3e0;
+              border-radius: 0.5rem;
+              padding: 0.6rem 1rem;
+              padding-right: calc(1rem + 17px);
+
+              .xBtn {
+                position: absolute;
+                right: 5px;
+                top: 50%;
+                transform: translateY(-50%);
+                font-size: 12px;
+
+                &:hover {
+                  color: rgb(53, 52, 52);
+                }
+              }
+            }
+          }
+        }
+
+        .imagePicker {
+          display: none;
+        }
+
+        .imagePickerLabel {
+          padding: 0.5rem 1rem;
+          color: white;
+          border-radius: 1rem;
+          width: max-content;
+          cursor: pointer;
+          background-color: #e28513;
+
+          &:hover {
+            background-color: #bd6d0c;
+          }
+
+          &:active {
+            background-color: #a15d09;
+          }
+        }
+
+        .addFieldCnr {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 1rem;
+          align-items: center;
+
+          .tagInput {
+            max-width: 300px;
+          }
+
+          .addFieldBtn {
+            padding: 0.8rem 1rem;
+            color: white;
+            border-radius: 1rem;
+            background-color: #e28513;
+
+            &:disabled {
+              @include disabled;
+            }
+
+            &:hover {
+              background-color: #bd6d0c;
+            }
+
+            &:active {
+              background-color: #a15d09;
+            }
+          }
+        }
+      }
+
+      .imageList {
+        margin-top: 3rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+
+        .imageCnr {
+          position: relative;
+          height: clamp(100px, 15vw, 200px);
+          aspect-ratio: 1;
+          border: 1px solid lightgrey;
+          border-radius: 2rem;
+          overflow: hidden;
+
+          .image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            pointer-events: none;
+          }
+
+          .imageBtnCnr {
+            z-index: 1000;
+            position: absolute;
+            top: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-inline: 1rem;
+            width: 100%;
+
+            .xBtn {
+              border: 1px solid lightgray;
+              height: 2.5rem;
+              width: 2.5rem;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              border-radius: 50%;
+              background-color: white;
+              cursor: pointer;
+              z-index: 10;
+
+              &:hover {
+                background-color: brown;
+                color: white;
+                border-color: transparent;
+              }
+
+              &:active {
+                background-color: rgb(139, 31, 31);
+              }
+
+              .xIcon {
+                display: block;
+                font-size: 1.4rem;
+              }
+            }
+
+            .newBadge {
+              background: #10b981;
+              color: white;
+              padding: 4px 8px;
+              border-radius: 4px;
+              font-size: 12px;
+              font-weight: bold;
+              z-index: 2;
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
 @media (max-width: 450px) {
-    .page {
-        .componentContainer {
-            margin: 3rem 1.5rem;
+  .page {
+    .componentContainer {
+      margin: 3rem 1.5rem;
 
-            .block {
-                padding: 2rem;
+      .block {
+        padding: 2rem;
 
-                .inputGroup {
-                    margin-top: 2rem;
+        .inputGroup {
+          margin-top: 2rem;
 
-                    .inputCnr {
-                        .info {
-                            min-width: 100px;
-                            white-space: wrap;
-                            word-break: break-word;
-                            overflow-wrap: break-word;
-                        }
-                    }
-                }
+          .inputCnr {
+            .info {
+              min-width: 100px;
+              white-space: wrap;
+              word-break: break-word;
+              overflow-wrap: break-word;
             }
+          }
         }
+      }
     }
+  }
 }

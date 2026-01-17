@@ -1,0 +1,38 @@
+.buttonsCnr {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+
+    .button {
+        padding: 0.8rem 1.4rem;
+        border-radius: 1rem;
+        border: none;
+        font-size: 1.6rem;
+        color: white;
+    }
+
+    .updateBtn,
+    .addBtn {
+        background-color: #4CAF50;
+
+        &:hover {
+            background-color: #419c44;
+        }
+
+        &:active {
+            background-color: #348136;
+        }
+    }
+
+    .deleteBtn {
+        background-color: red;
+
+        &:hover {
+            background-color: #CC0000;
+        }
+
+        &:active {
+            background-color: #ad0303;
+        }
+    }
+}

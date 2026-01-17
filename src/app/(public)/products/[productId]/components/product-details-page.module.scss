@@ -1,14 +1,13 @@
-.pageError {
-    text-align: center;
-    font-size: 1.6rem;
-    margin-top: 5rem;
-}
-
 .page {
     padding: 3rem clamp(2rem, 6vw, 14rem);
     font-size: 1.6rem;
     background-color: white;
     min-height: calc(100vh - var(--navbar-height));
+
+    .actionsCnr {
+        display: flex;
+        justify-content: flex-end;
+    }
 
     .headLine {
         color: #98A2B3;
