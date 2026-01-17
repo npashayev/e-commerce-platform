@@ -32,6 +32,12 @@ export async function updateProductInDB(
   });
 }
 
+export async function createProductInDB(data: Prisma.ProductCreateInput) {
+  return prisma.product.create({
+    data,
+  });
+}
+
 export async function deleteProductFromDB(id: string) {
   return prisma.product.delete({
     where: { id },
