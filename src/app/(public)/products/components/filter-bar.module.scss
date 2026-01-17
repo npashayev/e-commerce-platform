@@ -1,0 +1,160 @@
+.main {
+    padding: 1rem max(1.6vw, 15px);
+    background-color: white;
+    font-size: 1.4rem;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    border-bottom: 1px solid lightgray;
+    right: 0;
+    z-index: var(--filter-bar-index);
+    top: var(--navbar-height);
+    width: 100%;
+
+    .left {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+
+        .categoryBtn {
+            display: none;
+
+            .categoryIcon {
+                display: block;
+                border: 1px solid lightgray;
+                border-radius: 0.5rem;
+                font-size: 2.2rem;
+                padding: 0.8rem;
+            }
+        }
+
+        .leftEnd {
+            display: flex;
+            gap: 1rem;
+
+            .selector {
+                font-size: 1.6rem;
+                width: 20rem;
+            }
+        }
+    }
+
+    .right {
+        display: flex;
+        gap: 2rem;
+        justify-content: center;
+        align-items: center;
+
+        .form {
+            position: relative;
+
+            .searchBar {
+                outline: none;
+                border: 1px lightgray solid;
+                padding: 0.8rem 8rem 0.8rem 1.6rem;
+                border-radius: 1rem;
+                width: 350px;
+                font-size: 1.6rem;
+
+                &::placeholder {
+                    font-style: italic;
+                }
+
+                &:focus {
+                    border: 1px darkgray solid;
+                }
+            }
+
+            button {
+                position: absolute;
+                right: 6px;
+                top: 50%;
+                transform: translateY(-50%);
+                height: 80%;
+                border-radius: 1rem;
+                width: 6.4rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                background-color: #E28513;
+
+                &:hover {
+                    background-color: #bd6d0c;
+                }
+
+
+                &:active {
+                    background-color: #a15d09;
+                }
+            }
+        }
+    }
+}
+
+
+@media (max-width: 920px) {
+    .main {
+        .left {
+            .categoryBtn {
+                display: block;
+            }
+        }
+    }
+}
+
+@media (max-width: 800px) {
+    .main {
+        flex-direction: column-reverse;
+        padding-inline: 2rem;
+        gap: 2rem;
+
+        .left {
+            width: 100%;
+            justify-content: space-between;
+
+            .categoryBtn {
+                display: block;
+
+                .categoryIcon {
+                    font-size: 1.8rem;
+                }
+            }
+
+            .leftEnd {
+
+                .selector {
+                    width: 16rem;
+                }
+            }
+        }
+
+        .right {
+            width: 100%;
+
+            .form {
+                flex-shrink: 0;
+                width: 100%;
+
+                .searchBar {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 450px) {
+    .main {
+        .left {
+            .leftEnd {
+                .selector {
+                    font-size: 14px;
+                    width: 13rem;
+                }
+            }
+        }
+    }
+}
