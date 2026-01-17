@@ -7,10 +7,13 @@ import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import {
   UpdateProductInput,
   updateProductSchema,
+  CreateProductInput,
+  createProductSchema,
 } from '@/lib/validators/products';
 import {
   updateProductInDB,
   getProductByIdFromDB,
+  createProductInDB,
   deleteProductFromDB,
 } from '@/lib/prisma/api/products';
 import {
@@ -21,6 +24,13 @@ import { Prisma } from '@prisma/client';
 import { z } from 'zod';
 
 interface UpdateProductState {
+  success?: boolean;
+  error?: string;
+  message?: string;
+  issues?: z.ZodIssue[];
+}
+
+interface AddProductState {
   success?: boolean;
   error?: string;
   message?: string;
@@ -269,6 +279,157 @@ export async function updateProductAction(
 
     return {
       error: 'An unexpected error occurred',
+    };
+  }
+}
+
+export async function addProductAction(
+  prevState: AddProductState,
+  formData: FormData,
+): Promise<AddProductState> {
+  try {
+    // Check authentication and authorization (admin or moderator)
+    const session = await getServerSession(authOptions);
+
+    if (
+      !session?.user ||
+      (session.user.role !== 'admin' && session.user.role !== 'moderator')
+    ) {
+      return {
+        error: 'Unauthorized. Only admins and moderators can add products.',
+      };
+    }
+
+    // Extract all fields from FormData
+    const title = formData.get('title') as string;
+    const description = formData.get('description') as string;
+    const category = formData.get('category') as string;
+    const brand = formData.get('brand') as string;
+    const price = formData.get('price')
+      ? parseFloat(formData.get('price') as string)
+      : undefined;
+    const discountPercentage = formData.get('discountPercentage')
+      ? parseFloat(formData.get('discountPercentage') as string)
+      : undefined;
+    const weight = formData.get('weight')
+      ? parseFloat(formData.get('weight') as string)
+      : undefined;
+    const width = formData.get('width')
+      ? parseFloat(formData.get('width') as string)
+      : undefined;
+    const height = formData.get('height')
+      ? parseFloat(formData.get('height') as string)
+      : undefined;
+    const depth = formData.get('depth')
+      ? parseFloat(formData.get('depth') as string)
+      : undefined;
+    const warrantyInformation = formData.get('warrantyInformation') as string;
+    const shippingInformation = formData.get('shippingInformation') as string;
+    const returnPolicy = formData.get('returnPolicy') as string;
+    const minimumOrderQuantity = formData.get('minimumOrderQuantity')
+      ? parseInt(formData.get('minimumOrderQuantity') as string)
+      : undefined;
+
+    // Parse JSON fields
+    const tagsJson = formData.get('tags') as string;
+    const tags = tagsJson ? JSON.parse(tagsJson) : undefined;
+
+    const imagesJson = formData.get('images') as string;
+    const images = imagesJson ? JSON.parse(imagesJson) : undefined;
+
+    // Build request body (only include defined fields)
+    const requestBody: Record<string, unknown> = {};
+
+    if (title) requestBody.title = title;
+    if (description) requestBody.description = description;
+    if (category) requestBody.category = category;
+    if (brand !== null) requestBody.brand = brand;
+    if (price !== undefined) requestBody.price = price;
+    if (discountPercentage !== undefined)
+      requestBody.discountPercentage = discountPercentage;
+    if (weight !== undefined) requestBody.weight = weight;
+    if (width !== undefined) requestBody.width = width;
+    if (height !== undefined) requestBody.height = height;
+    if (depth !== undefined) requestBody.depth = depth;
+    if (warrantyInformation)
+      requestBody.warrantyInformation = warrantyInformation;
+    if (shippingInformation)
+      requestBody.shippingInformation = shippingInformation;
+    if (returnPolicy) requestBody.returnPolicy = returnPolicy;
+    if (minimumOrderQuantity !== undefined)
+      requestBody.minimumOrderQuantity = minimumOrderQuantity;
+    if (tags) requestBody.tags = tags;
+    if (images) requestBody.images = images;
+
+    // Validate with Zod
+    const validationResult = createProductSchema.safeParse(requestBody);
+
+    if (!validationResult.success) {
+      return {
+        error: 'Validation failed',
+        issues: validationResult.error.issues,
+      };
+    }
+
+    const validatedData: CreateProductInput = validationResult.data;
+
+    // Build create data with proper Prisma type
+    const createData: Prisma.ProductCreateInput = {
+      title: validatedData.title,
+      description: validatedData.description || '',
+      category: validatedData.category,
+      price: validatedData.price,
+      // Required fields with defaults
+      rating: 0,
+      stock: 0,
+      sku: `${validatedData.title.replace(/\s+/g, '-').toLowerCase()}-${Date.now()}`,
+      availabilityStatus: 'Out of Stock',
+      thumbnail: validatedData.images?.[0] || '',
+      // Optional fields
+      ...(validatedData.brand && { brand: validatedData.brand }),
+      discountPercentage: validatedData.discountPercentage ?? 0,
+      weight: validatedData.weight ?? 0,
+      warrantyInformation: validatedData.warrantyInformation || '',
+      shippingInformation: validatedData.shippingInformation || '',
+      returnPolicy: validatedData.returnPolicy || '',
+      minimumOrderQuantity: validatedData.minimumOrderQuantity ?? 1,
+      ...(validatedData.tags && { tags: validatedData.tags }),
+      ...(validatedData.images && { images: validatedData.images }),
+      // Handle dimensions separately
+      dimensions: {
+        width: validatedData.width ?? 0,
+        height: validatedData.height ?? 0,
+        depth: validatedData.depth ?? 0,
+      }
+    };
+
+    // Create product using prisma function
+    await createProductInDB(createData);
+
+    // Revalidate relevant pages
+    revalidatePath('/products');
+
+    // Redirect after successful creation
+    redirect('/products');
+  } catch (error) {
+    console.error('Add product server action error:', error);
+
+    // Handle NEXT_REDIRECT error (thrown by redirect function)
+    if (error instanceof Error && error.message === 'NEXT_REDIRECT') {
+      throw error; // Re-throw redirect errors so Next.js can handle them
+    }
+
+    // Type guard for Prisma errors
+    if (error instanceof Prisma.PrismaClientKnownRequestError) {
+      if (error.code === 'P2002') {
+        return {
+          error: 'A product with this information already exists',
+        };
+      }
+    }
+
+    return {
+      error: 'An unexpected error occurred while adding the product',
     };
   }
 }
