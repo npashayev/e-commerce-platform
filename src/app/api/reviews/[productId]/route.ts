@@ -1,7 +1,7 @@
 import { fetchReviewsByProductIdFromDB } from '@/lib/prisma/api/products';
 import { NextResponse } from 'next/server';
 
-export async function GET(req: Request, { params }: { params: { productId: string } }) {
+export async function GET(req: Request, { params }: { params: Promise<{ productId: string }> }) {
   const { productId } = await params;
 
   try {
