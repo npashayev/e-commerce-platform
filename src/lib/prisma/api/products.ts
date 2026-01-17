@@ -1,4 +1,5 @@
 import { prisma } from '@/lib/prisma/prisma';
+import { Prisma } from '@prisma/client';
 
 export async function fetchProductsFromDB() {
   return prisma.product.findMany();
@@ -19,4 +20,20 @@ export async function fetchReviewsByProductIdFromDB(productId: string) {
 
 export async function fetchCategoriesFromDB() {
   return prisma.category.findMany();
+}
+
+export async function updateProductInDB(
+  id: string,
+  data: Prisma.ProductUpdateInput,
+) {
+  return prisma.product.update({
+    where: { id },
+    data,
+  });
+}
+
+export async function deleteProductFromDB(id: string) {
+  return prisma.product.delete({
+    where: { id },
+  });
 }
