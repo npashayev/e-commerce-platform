@@ -4,6 +4,10 @@ import './globals.css';
 import Providers from '@/lib/contexts/Providers';
 import { Toaster } from 'react-hot-toast';
 import Navbar from '@/components/shared/navbar/Navbar';
+import { config } from "@fortawesome/fontawesome-svg-core";
+import "@fortawesome/fontawesome-svg-core/styles.css";
+
+config.autoAddCss = false;
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
