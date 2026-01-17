@@ -15,8 +15,8 @@ export async function middleware(req: NextRequest) {
     return NextResponse.redirect(loginUrl);
   }
 
-  // Check if user has admin role
-  if (token.role !== 'admin') {
+  // Check if user has admin or moderator role
+  if (token.role !== 'admin' && token.role !== 'moderator') {
     return NextResponse.redirect(new URL('/', req.url));
   }
 
