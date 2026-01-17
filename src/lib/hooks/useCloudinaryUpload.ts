@@ -8,7 +8,7 @@ interface UploadResponse {
 export const useCloudinaryUpload = () => {
   const [isUploading, setIsUploading] = useState(false);
 
-  const uploadImages = async (files: File[]): Promise<string[]> => {
+  const uploadImages = async (files: File[]) => {
     if (files.length === 0) return [];
 
     setIsUploading(true);
