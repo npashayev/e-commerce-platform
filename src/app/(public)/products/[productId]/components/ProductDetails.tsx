@@ -5,6 +5,7 @@ import Reviews from './Reviews';
 import { use } from 'react';
 import { getProductById } from '@/lib/api/products';
 import ProductGallery from './ProductGallery';
+import ProductAdminActions from './ProductAdminActions';
 
 interface Props {
   productId: string;
@@ -16,6 +17,9 @@ const ProductDetails = ({ productId }: Props) => {
 
   return (
     <main className={styles.page}>
+      <div className={styles.actionsCnr}>
+        <ProductAdminActions product={product} />
+      </div>
       <div className={styles.headLine}>
         <div className={styles.categoryContainer}>
           Category /{' '}
