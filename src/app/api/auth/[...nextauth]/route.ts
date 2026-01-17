@@ -27,7 +27,10 @@ export const authOptions: NextAuthOptions = {
           throw new Error('Invalid credentials');
         }
 
-        const isPasswordValid = await bcrypt.compare(credentials.password, user.password);
+        const isPasswordValid = await bcrypt.compare(
+          credentials.password,
+          user.password,
+        );
 
         if (!isPasswordValid) {
           throw new Error('Invalid credentials');
@@ -69,7 +72,10 @@ export const authOptions: NextAuthOptions = {
 };
 
 // Compatibility wrapper for Next.js 15
-async function auth(req: Request, context: { params: Promise<{ nextauth: string[] }> }): Promise<Response> {
+async function auth(
+  req: Request,
+  context: { params: Promise<{ nextauth: string[] }> },
+): Promise<Response> {
   const resolvedParams = await context.params;
   const nextauth = resolvedParams.nextauth;
 
