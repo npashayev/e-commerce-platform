@@ -11,13 +11,10 @@ export const PrivateComponent = ({
     children,
     roles,
 }: PrivateComponentProps) => {
-    const { role, isLoading } = useAuth();
+    const { role, isAuthenticated } = useAuth();
 
-    // Prevent flash during loading
-    if (isLoading) return null;
-
-    // Check if user has required role
-    if (!roles.includes(role || '')) return null;
+    // Check if user is authenticated and has required role
+    if (!isAuthenticated || !roles.includes(role)) return null;
 
     return <>{children}</>;
 };
