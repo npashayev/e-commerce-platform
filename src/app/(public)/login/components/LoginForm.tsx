@@ -5,12 +5,16 @@ import Link from 'next/link';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
-import { signIn } from 'next-auth/react';
+import { signIn, getSession } from 'next-auth/react';
+import { useAppDispatch } from '@/lib/hooks/useRedux';
+import { setUser } from '@/lib/store/slices/userSlice';
+import type { SafeUser } from '@/lib/types/auth';
 
 const LoginForm = () => {
   const [isPending, setIsPending] = useState(false);
   const [errors, setErrors] = useState<{ email?: string; password?: string; general?: string }>({});
   const router = useRouter();
+  const dispatch = useAppDispatch();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -32,11 +36,25 @@ const LoginForm = () => {
         setErrors({ general: 'Invalid email or password' });
         toast.error('Login failed!');
       } else {
+        // Update Redux with user data
+        const session = await getSession();
+        if (session?.user) {
+          const userData = {
+            id: session.user.id,
+            firstName: session.user.firstName as string,
+            lastName: session.user.lastName as string,
+            username: session.user.username as string,
+            email: session.user.email as string,
+            role: session.user.role as string,
+          } satisfies SafeUser;
+          dispatch(setUser(userData));
+        }
+
         toast.success('Logged in successfully!');
         router.push('/');
-        router.refresh(); // Refresh to update session
+        router.refresh();
       }
-    } catch (error) {
+    } catch {
       setErrors({ general: 'An error occurred. Please try again.' });
       toast.error('Login failed!');
     } finally {
