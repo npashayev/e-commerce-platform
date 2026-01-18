@@ -42,6 +42,9 @@ export const authOptions: NextAuthOptions = {
           name: `${user.firstName || ''} ${user.lastName || ''}`.trim(),
           image: user.image,
           role: user.role,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          username: user.username,
         };
       },
     }),
@@ -57,13 +60,21 @@ export const authOptions: NextAuthOptions = {
       if (user) {
         token.id = user.id;
         token.role = user.role;
+        token.firstName = user.firstName;
+        token.lastName = user.lastName;
+        token.username = user.username;
+        token.email = user.email;
       }
       return token;
     },
     async session({ session, token }) {
       if (session.user) {
-        session.user.id = token.id;
-        session.user.role = token.role;
+        session.user.id = token.id as string;
+        session.user.role = token.role as string;
+        session.user.firstName = token.firstName as string;
+        session.user.lastName = token.lastName as string;
+        session.user.username = token.username as string;
+        session.user.email = token.email as string;
       }
       return session;
     },
