@@ -1,16 +1,23 @@
-'use client';
-import { useSession } from 'next-auth/react';
+import { signOut } from 'next-auth/react';
+import { useAppDispatch, useAppSelector } from './useRedux';
+import { clearUser } from '@/lib/store/slices/userSlice';
 
 export const useAuth = () => {
-  const { data: session, status } = useSession();
-  
+  const dispatch = useAppDispatch();
+  const user = useAppSelector(state => state.user.user);
+
+  const logout = async () => {
+    // Clear Redux user state
+    dispatch(clearUser());
+
+    // Sign out from NextAuth
+    await signOut({ callbackUrl: '/' });
+  };
+
   return {
-    user: session?.user,
-    role: session?.user?.role,
-    isLoading: status === 'loading',
-    isAuthenticated: !!session,
-    isAdmin: session?.user?.role === 'admin',
-    isModerator: session?.user?.role === 'moderator',
-    hasAdminAccess: session?.user?.role === 'admin' || session?.user?.role === 'moderator',
+    user,
+    role: user?.role || '',
+    isAuthenticated: user !== null,
+    logout,
   };
 };
