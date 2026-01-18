@@ -1,8 +1,8 @@
 export type SafeUser = {
   id: string;
-  firstName?: string | null;
-  lastName?: string | null;
-  username?: string | null;
+  firstName: string;
+  lastName: string;
+  username: string;
   email: string;
   role: string;
 };
