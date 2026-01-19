@@ -1,9 +1,33 @@
 .infoHeading {
   font-size: 10px;
 
-  .title {
-    font-size: 3em;
-    font-weight: 500;
+  .titleCnr {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    .title {
+      font-size: 3em;
+      font-weight: 500;
+    }
+
+    .aiBtn {
+      padding: 0.8rem 1rem;
+      border-radius: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid lightgray;
+
+      &:hover {
+        background-color: lightgray;
+      }
+
+      .aiIcon {
+        font-size: 1.6em;
+        color: dodgerblue;
+      }
+    }
   }
 
   .ratingCnr {
