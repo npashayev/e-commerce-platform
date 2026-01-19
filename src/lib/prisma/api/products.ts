@@ -1,8 +1,11 @@
 import { prisma } from '@/lib/prisma/prisma';
 import { Prisma } from '@prisma/client';
 
-export async function fetchProductsFromDB() {
-  return prisma.product.findMany();
+export async function fetchProductsFromDB(category?: string) {
+  const where = category && category !== 'all' ? { category } : {};
+  return prisma.product.findMany({
+    where,
+  });
 }
 
 export async function getProductByIdFromDB(id: string) {

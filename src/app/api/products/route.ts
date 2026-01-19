@@ -9,9 +9,12 @@ import {
 import { Prisma } from '@prisma/client';
 
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
-    const products = await fetchProductsFromDB();
+    const { searchParams } = new URL(request.url);
+    const category = searchParams.get('category') || undefined;
+
+    const products = await fetchProductsFromDB(category);
     return NextResponse.json(products);
   } catch (error) {
     console.error('[GET_PRODUCTS_ERROR]', error);
