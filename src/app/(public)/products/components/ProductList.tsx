@@ -2,8 +2,12 @@ import styles from './products.module.scss';
 import ProductCard from './ProductCard';
 import { getProducts } from '@/lib/api/products';
 
-const ProductList = async () => {
-  const products = await getProducts();
+interface Props {
+  category?: string;
+}
+
+const ProductList = async ({ category }: Props) => {
+  const products = await getProducts(category);
 
   return (
     <main className={styles.main}>

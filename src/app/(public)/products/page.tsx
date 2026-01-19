@@ -17,7 +17,7 @@ const ProductsPage = ({ searchParams }: Props) => {
       <FilterBar />
       <div className={styles.content}>
         <Categories category={category} />
-        <ProductList />
+        <ProductList category={category} />
       </div>
     </div>
   );
