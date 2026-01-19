@@ -1,0 +1,46 @@
+.main {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 100%;
+
+    .userMenu {
+        height: 100%;
+        margin-left: 2.4rem;
+
+        .userNameCnr {
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            height: 100%;
+            font-size: 18px;
+            width: max-content;
+            max-width: 200px;
+        }
+    }
+
+    .loginBtn {
+        margin-left: 2.4rem;
+        height: 36px;
+        aspect-ratio: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        color: white;
+        overflow: hidden;
+        font-size: 18px;
+        background-color: #1D4ED8;
+
+        &:hover {
+            background-color: #1b399b;
+        }
+    }
+}
+
+@media (max-width: 760px) {
+    .bigScreenDropdown {
+        display: none;
+    }
+}
