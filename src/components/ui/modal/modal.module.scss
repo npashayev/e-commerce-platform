@@ -1,0 +1,40 @@
+.modal {
+    position: fixed;
+    inset: 0;
+    z-index: var(--modal-index);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .overlay {
+        position: absolute;
+        inset: 0;
+        background-color: rgba(0, 0, 0, 0.25);
+        z-index: -1;
+    }
+
+    .content {
+        color: black;
+        background-color: white;
+        box-shadow: 0 0 12px rgb(0, 0, 0, 0.25);
+        padding: 5rem 3rem;
+        border-radius: 2rem;
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .modal {
+        .content {
+            width: clamp(320px, 80%, 450px);
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .modal {
+        .content {
+            padding: 6rem 3rem;
+        }
+    }
+}
