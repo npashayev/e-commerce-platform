@@ -6,6 +6,7 @@ import { use } from 'react';
 import { getProductById } from '@/lib/api/products';
 import ProductGallery from './ProductGallery';
 import ProductAdminActions from './ProductAdminActions';
+import Link from 'next/link';
 
 interface Props {
   productId: string;
@@ -14,7 +15,6 @@ interface Props {
 const ProductDetails = ({ productId }: Props) => {
   const product = use(getProductById(productId));
   if (!product) return null;
-
   return (
     <main className={styles.page}>
       <div className={styles.actionsCnr}>
@@ -23,12 +23,10 @@ const ProductDetails = ({ productId }: Props) => {
       <div className={styles.headLine}>
         <div className={styles.categoryContainer}>
           Category /{' '}
-          <a href={`/products/category/${product.category}`} target="_blank" className={styles.categoryName}>
+          <Link href={`/products?category=${product.category}`} target="_blank" className={styles.categoryName}>
             {product.category}
-          </a>
+          </Link>
         </div>
-
-        {/* <ProductActions product={product} /> */}
       </div>
 
       <div className={styles.mainInfo}>
