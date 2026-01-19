@@ -1,10 +1,21 @@
 import { prisma } from '@/lib/prisma/prisma';
 import { Prisma } from '@prisma/client';
 
-export async function fetchProductsFromDB(category?: string) {
+export async function fetchProductsFromDB(category?: string, sortBy?: string, order?: string) {
   const where = category && category !== 'all' ? { category } : {};
+
+  let orderBy: Prisma.ProductOrderByWithRelationInput = {};
+  if (sortBy && order) {
+    if (sortBy === 'price') {
+      orderBy = { price: order === 'asc' ? 'asc' : 'desc' };
+    } else if (sortBy === 'rating') {
+      orderBy = { rating: order === 'asc' ? 'asc' : 'desc' };
+    }
+  }
+
   return prisma.product.findMany({
     where,
+    orderBy,
   });
 }
 

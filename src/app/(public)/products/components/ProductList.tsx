@@ -4,10 +4,12 @@ import { getProducts } from '@/lib/api/products';
 
 interface Props {
   category?: string;
+  sortBy?: string;
+  order?: string;
 }
 
-const ProductList = async ({ category }: Props) => {
-  const products = await getProducts(category);
+const ProductList = async ({ category, sortBy, order }: Props) => {
+  const products = await getProducts(category, sortBy, order);
 
   return (
     <main className={styles.main}>

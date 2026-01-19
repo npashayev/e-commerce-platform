@@ -13,8 +13,10 @@ export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
     const category = searchParams.get('category') || undefined;
+    const sortBy = searchParams.get('sortBy') || undefined;
+    const order = searchParams.get('order') || undefined;
 
-    const products = await fetchProductsFromDB(category);
+    const products = await fetchProductsFromDB(category, sortBy, order);
     return NextResponse.json(products);
   } catch (error) {
     console.error('[GET_PRODUCTS_ERROR]', error);

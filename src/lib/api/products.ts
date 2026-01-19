@@ -1,8 +1,16 @@
 import { Category, Product, Review } from '@prisma/client';
 import { apiFetch } from './apiFetch';
 
-export async function getProducts(category?: string) {
-  const url = category ? `/products?category=${encodeURIComponent(category)}` : '/products';
+export async function getProducts(category?: string, sortBy?: string, order?: string) {
+  const params = new URLSearchParams();
+
+  if (category) params.set('category', category);
+  if (sortBy) params.set('sortBy', sortBy);
+  if (order) params.set('order', order);
+
+  const queryString = params.toString();
+  const url = queryString ? `/products?${queryString}` : '/products';
+
   return apiFetch<Product[]>(url);
 }
 
