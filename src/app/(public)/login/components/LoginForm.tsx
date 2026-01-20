@@ -9,9 +9,12 @@ import { signIn, getSession } from 'next-auth/react';
 import { useAppDispatch } from '@/lib/hooks/useRedux';
 import { setUser } from '@/lib/store/slices/userSlice';
 import type { SafeUser } from '@/lib/types/auth';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 const LoginForm = () => {
   const [isPending, setIsPending] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState<{ email?: string; password?: string; general?: string }>({});
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -72,8 +75,8 @@ const LoginForm = () => {
       {/* Email */}
       <div className={styles.inputField}>
         <div className={styles.inputCnr}>
-          <input type="email" name="email" disabled={isPending} required />
-          <label>Email</label>
+          <input type="email" id="email" name="email" placeholder=" " disabled={isPending} required />
+          <label htmlFor="email">Email</label>
         </div>
         {errors.email && (
           <div className={`${styles.error} ${styles.responseError}`}>{errors.email}</div>
@@ -83,9 +86,11 @@ const LoginForm = () => {
       {/* Password */}
       <div className={styles.inputField}>
         <div className={styles.inputCnr}>
-          <input type="password" name="password" autoComplete="current-password" disabled={isPending} required />
-          <label>Password</label>
-          <button type="button" className={styles.toggleBtn}></button>
+          <input type={showPassword ? 'text' : 'password'} id="password" name="password" placeholder=" " autoComplete="current-password" disabled={isPending} required />
+          <label htmlFor="password">Password</label>
+          <button type="button" className={styles.toggleBtn} onClick={() => setShowPassword(!showPassword)} tabIndex={-1}>
+            <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+          </button>
         </div>
         {errors.password && (
           <div className={`${styles.error} ${styles.responseError}`}>{errors.password}</div>
