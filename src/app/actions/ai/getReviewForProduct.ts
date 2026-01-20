@@ -2,8 +2,13 @@
 import { gemini } from "@/lib/ai/gemini";
 import { Product } from "@prisma/client";
 import { AI_PRODUCT_REVIEW_PROMPT } from "@/lib/constants/prompts";
+import { features } from "@/lib/config/features";
 
 export const getAiReviewForProduct = async (product: Product) => {
+    if (!features.aiReviewEnabled) {
+        throw new Error('AI Review feature is currently disabled');
+    }
+
     const productJson = JSON.stringify(product);
     const fullPrompt = AI_PRODUCT_REVIEW_PROMPT + `PRODUCT JSON: \n ${productJson}`;
 

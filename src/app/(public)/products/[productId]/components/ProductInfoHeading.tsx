@@ -9,6 +9,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import AiReviewModal from './AiReviewModal';
 import useBodyScrollLock from '@/lib/hooks/useBodyScrollLock';
+import { features } from '@/lib/config/features';
 
 interface Props {
   product: Product;
@@ -33,27 +34,32 @@ const ProductInfoHeading = ({ product }: Props) => {
     clearAiResponse();
   };
 
-  const handleClearError = () => {
+  const handleRetry = async () => {
     clearError();
+    await getReview(true);
   };
 
   return (
     <>
-      <AiReviewModal
-        isOpen={modalOpen}
-        onClose={handleCloseModal}
-        loading={loading}
-        error={aiError}
-        aiResponse={aiResponse}
-        onClearError={handleClearError}
-      />
+      {features.aiReviewEnabled && (
+        <AiReviewModal
+          isOpen={modalOpen}
+          onClose={handleCloseModal}
+          loading={loading}
+          error={aiError}
+          aiResponse={aiResponse}
+          onRetry={handleRetry}
+        />
+      )}
       <div className={styles.infoHeading}>
         <div className={styles.titleCnr}>
           <h1 className={styles.title}>{product.title}</h1>
-          <button className={styles.aiBtn} onClick={handleGetReview} disabled={loading}>
-            <span>Get AI Review</span>
-            <FontAwesomeIcon icon={faHexagonNodes} className={styles.aiIcon} />
-          </button>
+          {features.aiReviewEnabled && (
+            <button className={styles.aiBtn} onClick={handleGetReview} disabled={loading}>
+              <span>Get AI Review</span>
+              <FontAwesomeIcon icon={faHexagonNodes} className={styles.aiIcon} />
+            </button>
+          )}
         </div>
 
         <div className={styles.ratingCnr}>

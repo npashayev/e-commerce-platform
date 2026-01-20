@@ -2,8 +2,16 @@ import { NextResponse } from 'next/server';
 import { gemini } from '@/lib/ai/gemini';
 import { prisma } from '@/lib/prisma/prisma';
 import { AI_PRODUCT_REVIEW_PROMPT } from '@/lib/constants/prompts';
+import { features } from '@/lib/config/features';
 
 export async function POST(request: Request) {
+  if (!features.aiReviewEnabled) {
+    return NextResponse.json(
+      { error: 'AI Review feature is currently disabled' },
+      { status: 503 }
+    );
+  }
+
   try {
     const body = await request.json();
     const { productId } = body;

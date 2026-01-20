@@ -1,7 +1,7 @@
 import Modal from "@/components/ui/modal/Modal";
 import styles from './ai-review-modal.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStar, faSpinner, faExclamationTriangle, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faSpinner, faExclamationTriangle, faTimes } from '@fortawesome/free-solid-svg-icons';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
@@ -11,7 +11,7 @@ interface AiReviewModalProps {
     loading: boolean;
     error: string | null;
     aiResponse: string | null;
-    onClearError: () => void;
+    onRetry: () => void;
 }
 
 const AiReviewModal = ({
@@ -20,7 +20,7 @@ const AiReviewModal = ({
     loading,
     error,
     aiResponse,
-    onClearError
+    onRetry
 }: AiReviewModalProps) => {
 
     return (
@@ -45,7 +45,7 @@ const AiReviewModal = ({
                         <div className={styles.error}>
                             <FontAwesomeIcon icon={faExclamationTriangle} className={styles.errorIcon} />
                             <p>{error}</p>
-                            <button onClick={onClearError} className={styles.retryButton}>
+                            <button onClick={onRetry} className={styles.retryButton}>
                                 Try Again
                             </button>
                         </div>
