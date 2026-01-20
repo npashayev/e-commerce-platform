@@ -1,13 +1,20 @@
 import { getCategories } from '@/lib/api/products';
 import { use } from 'react';
 import AddProduct from './components/AddProduct';
+import { Metadata } from 'next';
 
 export const dynamic = 'force-dynamic';
 
-const AddProductPage = () => {
-    const categories = use(getCategories());
+export const metadata: Metadata = {
+  title: 'Add Product',
+  description: 'Add a new product to the catalog.',
+  robots: { index: false, follow: false },
+};
 
-    return <AddProduct categories={categories} />;
+const AddProductPage = () => {
+  const categories = use(getCategories());
+
+  return <AddProduct categories={categories} />;
 };
 
 export default AddProductPage;

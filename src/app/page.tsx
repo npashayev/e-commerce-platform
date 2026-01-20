@@ -3,6 +3,17 @@ import styles from './page.module.scss';
 import TextType from '@/components/react-bits/text-type/TextType';
 import SlideShow from './components/SlideShow';
 import Link from 'next/link';
+import { Metadata } from 'next';
+import { SITE_NAME, SITE_DESCRIPTION } from '@/lib/constants/seo';
+
+export const metadata: Metadata = {
+  title: `${SITE_NAME} - Discover Products You'll Love`,
+  description: SITE_DESCRIPTION,
+  openGraph: {
+    title: `${SITE_NAME} - Discover Products You'll Love`,
+    description: SITE_DESCRIPTION,
+  },
+};
 
 const HomePage = () => {
   return (

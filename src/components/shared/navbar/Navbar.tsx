@@ -19,7 +19,7 @@ const Navbar = () => {
           height={35}
           width={35}
         />
-        <div className={styles.name}>Online shop</div>
+        <div className={styles.name}>Bazaar</div>
       </Link>
       <div ref={menuRef} className={styles.right}>
         <div className={styles.rightItemsCnr}>

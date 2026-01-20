@@ -1,8 +1,15 @@
 import { getCategories, getProductById } from '@/lib/api/products';
 import { use } from 'react';
 import UpdateProduct from './components/UpdateProduct';
+import { Metadata } from 'next';
 
 export const dynamic = 'force-dynamic';
+
+export const metadata: Metadata = {
+  title: 'Update Product',
+  description: 'Update product information.',
+  robots: { index: false, follow: false },
+};
 
 interface Props {
   params: Promise<{
