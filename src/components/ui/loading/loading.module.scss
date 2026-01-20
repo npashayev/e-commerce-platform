@@ -1,0 +1,20 @@
+.loadingCnr {
+    width: 100%;
+    text-align: center;
+
+    .spinner {
+        animation: spin .6s linear infinite;
+        color: grey;
+    }
+}
+
+
+@keyframes spin {
+    from {
+        transform: rotate(0);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
