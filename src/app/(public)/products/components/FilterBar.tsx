@@ -28,7 +28,7 @@ const FilterBar = () => {
     const router = useRouter();
     const pathname = usePathname();
 
-    const urlSearchText = useMemo(() => searchParams.get('q') || '', [searchParams]);
+    const urlSearchText = useMemo(() => searchParams.get('search') || '', [searchParams]);
     const [inputValue, setInputValue] = useState('');
 
     // Sync input value with URL when URL changes
@@ -50,7 +50,7 @@ const FilterBar = () => {
             return;
         }
 
-        router.push(`/products?q=${encodeURIComponent(trimmed)}`);
+        router.push(`/products?search=${encodeURIComponent(trimmed)}`);
     };
 
     const handleOptionChange = (selectedOption: unknown) => {

@@ -11,10 +11,11 @@ interface Props {
   category?: string;
   sortBy?: string;
   order?: string;
+  search?: string;
   initialData: PaginatedProductsResponse;
 }
 
-const ProductListClient = ({ category, sortBy, order, initialData }: Props) => {
+const ProductListClient = ({ category, sortBy, order, search, initialData }: Props) => {
   const { ref, inView } = useInView();
 
   const {
@@ -29,6 +30,7 @@ const ProductListClient = ({ category, sortBy, order, initialData }: Props) => {
     category,
     sortBy,
     order,
+    search,
     initialData,
   });
 

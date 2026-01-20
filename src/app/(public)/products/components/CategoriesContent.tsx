@@ -18,6 +18,7 @@ const CategoriesContent = ({ activeCategory, categories }: Props) => {
   const handleCategoryClick = (categorySlug: string) => {
     const newParams = new URLSearchParams(searchParams);
     newParams.set('category', categorySlug);
+    newParams.delete('search'); // Remove search param when category changes
 
     router.push(`${pathname}?${newParams.toString()}`);
   };

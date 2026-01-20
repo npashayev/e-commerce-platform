@@ -19,6 +19,7 @@ export async function GET(request: Request) {
     const order = searchParams.get('order') || undefined;
     const cursor = searchParams.get('cursor') || undefined;
     const limitParam = searchParams.get('limit');
+    const search = searchParams.get('search') || undefined;
     
     // Use paginated fetch if cursor or limit is provided (infinite scroll mode)
     // First request gets 50 items, subsequent requests get 30
@@ -34,6 +35,7 @@ export async function GET(request: Request) {
       order,
       cursor,
       limit,
+      search,
     });
     
     return NextResponse.json(result);

@@ -13,6 +13,7 @@ export interface UseProductsOptions {
   category?: string;
   sortBy?: string;
   order?: string;
+  search?: string;
   initialData?: PaginatedProductsResponse;
 }
 
@@ -20,12 +21,13 @@ const getNextPageParam = (lastPage: PaginatedProductsResponse) =>
   lastPage.hasMore ? lastPage.nextCursor : undefined;
 
 export const useProducts = (options: UseProductsOptions) => {
-  const { category, sortBy, order, initialData } = options;
+  const { category, sortBy, order, search, initialData } = options;
 
   const params: Omit<GetProductsParams, 'cursor'> = {
     category,
     sortBy,
     order,
+    search,
   };
 
   return useInfiniteQuery({

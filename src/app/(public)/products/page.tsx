@@ -9,17 +9,18 @@ interface Props {
     category?: string;
     sortBy?: string;
     order?: string;
+    search?: string;
   }>;
 }
 
 const ProductsPage = ({ searchParams }: Props) => {
-  const { category, sortBy, order } = use(searchParams);
+  const { category, sortBy, order, search } = use(searchParams);
   return (
     <div className={styles.page}>
       <FilterBar />
       <div className={styles.content}>
         <Categories category={category} />
-        <ProductList category={category} sortBy={sortBy} order={order} />
+        <ProductList category={category} sortBy={sortBy} order={order} search={search} />
       </div>
     </div>
   );

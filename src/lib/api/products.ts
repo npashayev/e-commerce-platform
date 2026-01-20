@@ -16,6 +16,7 @@ export interface GetProductsParams {
   order?: string;
   cursor?: string;
   limit?: number;
+  search?: string;
 }
 
 // Client-side fetch for products (used with React Query)
@@ -28,13 +29,15 @@ export const getProducts = (params: GetProductsParams) =>
 export async function getProductsServer(
   category?: string,
   sortBy?: string,
-  order?: string
+  order?: string,
+  search?: string
 ) {
   const params = new URLSearchParams();
 
   if (category) params.set('category', category);
   if (sortBy) params.set('sortBy', sortBy);
   if (order) params.set('order', order);
+  if (search) params.set('search', search);
 
   const queryString = params.toString();
   const url = queryString ? `/products?${queryString}` : '/products';
