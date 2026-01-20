@@ -42,17 +42,25 @@ export async function getProductsServer(
   const queryString = params.toString();
   const url = queryString ? `/products?${queryString}` : '/products';
 
-  return apiFetch<PaginatedProductsResponse>(url);
+  return apiFetch<PaginatedProductsResponse>(url, {
+    revalidate: 3600,
+  });
 }
 
 export async function getProductById(id: string) {
-  return apiFetch<Product>(`/products/${id}`);
+  return apiFetch<Product>(`/products/${id}`, {
+    revalidate: 3600,
+  });
 }
 
 export async function getReviewsByProductId(productId: string) {
-  return apiFetch<Review[]>(`/reviews/${productId}`);
+  return apiFetch<Review[]>(`/reviews/${productId}`, {
+    revalidate: 3600,
+  });
 }
 
 export async function getCategories() {
-  return apiFetch<Category[]>('/categories');
+  return apiFetch<Category[]>('/categories', {
+    revalidate: 3600,
+  });
 }

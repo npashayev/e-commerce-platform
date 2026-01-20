@@ -11,6 +11,10 @@ import {
   updateProductSchema,
 } from '@/lib/validators/products';
 import { Prisma } from '@prisma/client';
+import { revalidatePath } from 'next/cache';
+
+// Cache GET requests for 1 hour
+export const revalidate = 3600;
 
 interface Params {
   params: Promise<{ id: string }>;
@@ -153,6 +157,11 @@ export async function PATCH(
     // Update product using prisma function
     const updatedProduct = await updateProductInDB(id, updateData);
 
+    // Revalidate product pages to clear cache
+    revalidatePath('/products');
+    revalidatePath(`/products/${id}`);
+    revalidatePath(`/admin/products/${id}/update`);
+
     return NextResponse.json({
       success: true,
       message: 'Product updated successfully',
@@ -238,6 +247,12 @@ export async function DELETE(
 
     // Delete product from database
     await deleteProductFromDB(id);
+
+    // Revalidate product pages to clear cache
+    revalidatePath('/products');
+    revalidatePath(`/products/${id}`);
+    revalidatePath('/admin/products');
+    revalidatePath('/admin');
 
     return NextResponse.json({
       success: true,

@@ -14,7 +14,9 @@ export async function apiFetch<T, B extends Record<string, unknown> | undefined 
   endpoint: string,
   options: ApiFetchOptions<B> = {},
 ): Promise<T> {
-  const { method = 'GET', body, cache = 'no-store', revalidate, headers } = options;
+  const { method = 'GET', body, cache, revalidate, headers } = options;
+
+  const cacheStrategy = revalidate !== undefined ? 'force-cache' : (cache ?? 'no-store');
 
   const fetchOptions: RequestInit & { next?: { revalidate: number } } = {
     method,
@@ -23,7 +25,7 @@ export async function apiFetch<T, B extends Record<string, unknown> | undefined 
       ...headers,
     },
     body: body && method !== 'GET' ? JSON.stringify(body) : undefined,
-    cache,
+    cache: cacheStrategy,
   };
 
   // Add Next.js ISR option if defined

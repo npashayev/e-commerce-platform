@@ -7,6 +7,10 @@ import {
   createProductSchema,
 } from '@/lib/validators/products';
 import { Prisma } from '@prisma/client';
+import { revalidatePath } from 'next/cache';
+
+// Cache GET requests for 1 hour
+export const revalidate = 3600;
 
 const DEFAULT_INITIAL_LIMIT = 50;
 const DEFAULT_PAGE_LIMIT = 30;
@@ -107,6 +111,10 @@ export async function POST(request: Request) {
 
     // Create product using prisma function
     const createdProduct = await createProductInDB(createData);
+
+    // Revalidate product pages to clear cache
+    revalidatePath('/products');
+    revalidatePath(`/products/${createdProduct.id}`);
 
     return NextResponse.json({
       success: true,
