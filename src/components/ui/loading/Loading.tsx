@@ -4,13 +4,17 @@ import styles from './loading.module.scss';
 import { CSSProperties } from 'react';
 
 interface Props {
-  style?: CSSProperties;
+    style?: CSSProperties;
+    text?: string;
 }
 
-const Loading = ({ style }: Props) => {
-    return <div style={style} className={styles.loadingCnr}>
-        <FontAwesomeIcon icon={faSpinner} className={styles.spinner} />
-    </div>;
+const Loading = ({ style, text }: Props) => {
+    return (
+        <div style={style} className={styles.loadingCnr}>
+            <FontAwesomeIcon icon={faSpinner} className={styles.spinner} />
+            {text && <p className={styles.text}>{text}</p>}
+        </div>
+    );
 };
 
 export default Loading;
