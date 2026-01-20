@@ -1,7 +1,35 @@
 import { Category, Product, Review } from '@prisma/client';
 import { apiFetch } from './apiFetch';
+import apiClient from './apiClient';
 
-export async function getProducts(category?: string, sortBy?: string, order?: string) {
+// Types for paginated products response
+export interface PaginatedProductsResponse {
+  products: Product[];
+  nextCursor: string | null;
+  hasMore: boolean;
+  total: number;
+}
+
+export interface GetProductsParams {
+  category?: string;
+  sortBy?: string;
+  order?: string;
+  cursor?: string;
+  limit?: number;
+}
+
+// Client-side fetch for products (used with React Query)
+export const getProducts = (params: GetProductsParams) =>
+  apiClient
+    .get<PaginatedProductsResponse>('/products', { params })
+    .then((res) => res.data);
+
+// Server-side fetch for initial data (used in server components)
+export async function getProductsServer(
+  category?: string,
+  sortBy?: string,
+  order?: string
+) {
   const params = new URLSearchParams();
 
   if (category) params.set('category', category);
@@ -11,7 +39,7 @@ export async function getProducts(category?: string, sortBy?: string, order?: st
   const queryString = params.toString();
   const url = queryString ? `/products?${queryString}` : '/products';
 
-  return apiFetch<Product[]>(url);
+  return apiFetch<PaginatedProductsResponse>(url);
 }
 
 export async function getProductById(id: string) {

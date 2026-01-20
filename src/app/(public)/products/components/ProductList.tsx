@@ -1,6 +1,5 @@
-import styles from './products.module.scss';
-import ProductCard from './ProductCard';
-import { getProducts } from '@/lib/api/products';
+import { getProductsServer } from '@/lib/api/products';
+import ProductListClient from './ProductListClient';
 
 interface Props {
   category?: string;
@@ -9,16 +8,16 @@ interface Props {
 }
 
 const ProductList = async ({ category, sortBy, order }: Props) => {
-  const products = await getProducts(category, sortBy, order);
+  // Fetch initial 50 products on the server
+  const initialData = await getProductsServer(category, sortBy, order);
 
   return (
-    <main className={styles.main}>
-      <div className={styles.productsCnr}>
-        {products.map(product => (
-          <ProductCard key={product.id} product={product} />
-        ))}
-      </div>
-    </main>
+    <ProductListClient
+      category={category}
+      sortBy={sortBy}
+      order={order}
+      initialData={initialData}
+    />
   );
 };
 
