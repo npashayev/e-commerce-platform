@@ -61,22 +61,26 @@ export function useAiReview({ product }: Props) {
         } catch (error: unknown) {
             console.error('AI Review error:', error);
 
-            if (
-                typeof error === 'object' &&
-                error !== null &&
-                'status' in error &&
-                error.status === 429
-            ) {
+            const errorMessage = error instanceof Error ? error.message.toLowerCase() : '';
+            
+            // Check for rate limit errors (server actions serialize errors, so check message)
+            const isRateLimitError = 
+                errorMessage.includes('429') ||
+                errorMessage.includes('rate limit') ||
+                errorMessage.includes('exhausted') ||
+                errorMessage.includes('quota') ||
+                errorMessage.includes('too many requests');
+
+            if (isRateLimitError) {
                 setAiError('Rate limit exceeded. Please try again later.');
                 setAiResponse(null);
-                setLoading(false);
                 return null;
             }
 
             setAiResponse(null);
             setAiError(
-                error instanceof Error
-                    ? error.message || 'Unfortunately, AI could not generate a review. Please try again later.'
+                error instanceof Error && error.message
+                    ? error.message
                     : 'Unfortunately, AI could not generate a review. Please try again later.'
             );
             return null;
