@@ -12,7 +12,7 @@ interface Props {
 const Categories = ({ category }: Props) => {
   const activeCategory = category ?? 'all';
   const categories = use(getCategories());
-  const extendedCategories: Category[] = [{ id: 'all', name: 'All', slug: "all" }, ...categories];
+  const extendedCategories = [{ id: 'all', name: 'All', slug: 'all' }, ...categories] as Category[];
   return (
     <aside className={styles.sidebar}>
       <div className={styles.categoriesHeading}>Categories</div>

@@ -2,6 +2,8 @@ import { getCategories, getProductById } from '@/lib/api/products';
 import { use } from 'react';
 import UpdateProduct from './components/UpdateProduct';
 
+export const dynamic = 'force-dynamic';
+
 interface Props {
   params: Promise<{
     productId: string;

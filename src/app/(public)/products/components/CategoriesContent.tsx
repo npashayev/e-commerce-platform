@@ -2,8 +2,8 @@
 import styles from './categories.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
-import { Category } from '@prisma/client';
 import { useRouter, useSearchParams, usePathname } from 'next/navigation';
+import { Category } from '@prisma/client';
 
 interface Props {
   categories: Category[];
