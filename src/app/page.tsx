@@ -31,7 +31,7 @@ const HomePage = () => {
           showCursor={true}
           cursorCharacter="|"
         />
-        <Link href="/products" className={styles.exploreBtn}>
+        <Link href="/products?category=all" className={styles.exploreBtn}>
           Explore
         </Link>
       </div>
