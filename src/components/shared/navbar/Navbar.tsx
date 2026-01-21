@@ -5,6 +5,8 @@ import Image from 'next/image';
 import { useRef } from 'react';
 import logo from '@/assets/logo.png';
 import UserMenu from './UserMenu';
+import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Navbar = () => {
   const menuRef = useRef(null);
@@ -39,6 +41,17 @@ const Navbar = () => {
           </nav>
 
           <div className={styles.userActionBtns}>
+            <Link
+              href="/userId/cart"
+              aria-label="Cart"
+              style={{
+                color: 'inherit',
+                marginRight: '1rem',
+                fontSize: '1.2rem',
+              }}
+            >
+              <FontAwesomeIcon icon={faCartShopping} />
+            </Link>
             <UserMenu />
           </div>
         </div>
