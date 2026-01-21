@@ -9,6 +9,7 @@ import {
   updateCartItemQuantity,
   removeItemFromCart,
   clearCart,
+  getCartItemByProductId,
 } from '@/lib/prisma/api/cart';
 import {
   addToCartSchema,
@@ -22,6 +23,7 @@ export interface CartActionState {
   success?: boolean;
   error?: string;
   message?: string;
+  timestamp?: number;
 }
 
 export interface CheckoutActionState {
@@ -96,7 +98,10 @@ export async function addToCartAction(
     const session = await getServerSession(authOptions);
 
     if (!session?.user?.id) {
-      return { error: 'Please login to add items to cart' };
+      return {
+        error: 'Please login to add items to cart',
+        timestamp: Date.now(),
+      };
     }
 
     const productId = formData.get('productId') as string;
@@ -108,6 +113,20 @@ export async function addToCartAction(
     if (!validationResult.success) {
       return {
         error: validationResult.error.issues[0]?.message || 'Invalid input',
+        timestamp: Date.now(),
+      };
+    }
+
+    // Check if product already exists in cart
+    const existingItem = await getCartItemByProductId(
+      session.user.id,
+      productId,
+    );
+
+    if (existingItem) {
+      return {
+        error: 'This product is already in your cart',
+        timestamp: Date.now(),
       };
     }
 
@@ -119,10 +138,11 @@ export async function addToCartAction(
     return {
       success: true,
       message: 'Item added to cart',
+      timestamp: Date.now(),
     };
   } catch (error) {
     console.error('Add to cart error:', error);
-    return { error: 'Failed to add item to cart' };
+    return { error: 'Failed to add item to cart', timestamp: Date.now() };
   }
 }
 

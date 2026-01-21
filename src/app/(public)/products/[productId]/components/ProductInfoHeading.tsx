@@ -10,7 +10,7 @@ import { useState } from 'react';
 import AiReviewModal from './AiReviewModal';
 import useBodyScrollLock from '@/lib/hooks/useBodyScrollLock';
 import { features } from '@/lib/config/features';
-import AddToCartButton from './AddToCartButton';
+import AddToCartButton from '@/components/shared/add-to-cart-button/AddToCartButton';
 
 interface Props {
   product: Product;
@@ -19,8 +19,18 @@ interface Props {
 const ProductInfoHeading = ({ product }: Props) => {
   const productRating = Math.round(product.rating * 10) / 10;
   const discountPercentage = Math.floor(product.discountPercentage);
-  const newPrice = (product.price - (product.price * product.discountPercentage) / 100).toFixed(2);
-  const { aiError, aiResponse, getReview, loading, clearError, clearAiResponse } = useAiReview({ product });
+  const newPrice = (
+    product.price -
+    (product.price * product.discountPercentage) / 100
+  ).toFixed(2);
+  const {
+    aiError,
+    aiResponse,
+    getReview,
+    loading,
+    clearError,
+    clearAiResponse,
+  } = useAiReview({ product });
   const [modalOpen, setModalOpen] = useState(false);
   useBodyScrollLock(modalOpen);
 
@@ -56,15 +66,25 @@ const ProductInfoHeading = ({ product }: Props) => {
         <div className={styles.titleCnr}>
           <h1 className={styles.title}>{product.title}</h1>
           {features.aiReviewEnabled && (
-            <button className={styles.aiBtn} onClick={handleGetReview} disabled={loading}>
+            <button
+              className={styles.aiBtn}
+              onClick={handleGetReview}
+              disabled={loading}
+            >
               <span>Get AI Review</span>
-              <FontAwesomeIcon icon={faHexagonNodes} className={styles.aiIcon} />
+              <FontAwesomeIcon
+                icon={faHexagonNodes}
+                className={styles.aiIcon}
+              />
             </button>
           )}
         </div>
 
         <div className={styles.ratingCnr}>
-          <div className={styles.starsCnr} style={{ width: `${(productRating / 5) * 90}px` }}>
+          <div
+            className={styles.starsCnr}
+            style={{ width: `${(productRating / 5) * 90}px` }}
+          >
             {[...Array(5)].map((_, i) => (
               <div key={i} className={styles.starCnr}>
                 <Image src={star} alt="star" className={styles.star} />
@@ -73,11 +93,12 @@ const ProductInfoHeading = ({ product }: Props) => {
           </div>
 
           <div className={styles.ratingSeparator} />
-
         </div>
 
         <div className={styles.priceCnr}>
-          {discountPercentage > 0 && <span className={styles.oldPrice}>${product.price}</span>}
+          {discountPercentage > 0 && (
+            <span className={styles.oldPrice}>${product.price}</span>
+          )}
           <span className={styles.newPrice}>${newPrice}</span>
         </div>
 
@@ -86,7 +107,6 @@ const ProductInfoHeading = ({ product }: Props) => {
         </div>
       </div>
     </>
-
   );
 };
 
