@@ -4,7 +4,11 @@ import { revalidatePath } from 'next/cache';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { createReviewSchema } from '@/lib/validators/reviews';
-import { createReviewForProductInDB } from '@/lib/prisma/api/products';
+import {
+    createReviewForProductInDB,
+    getReviewByIdFromDB,
+    deleteReviewFromDB,
+} from '@/lib/prisma/api/products';
 import { z } from 'zod';
 
 export interface CreateReviewState {
@@ -67,3 +71,44 @@ export async function createReviewAction(
     }
 }
 
+export interface DeleteReviewState {
+    success?: boolean;
+    error?: string;
+}
+
+export async function deleteReviewAction(
+    reviewId: string,
+    productId: string,
+): Promise<DeleteReviewState> {
+    try {
+        const session = await getServerSession(authOptions);
+
+        if (!session?.user) {
+            return { error: 'Unauthorized' };
+        }
+
+        const review = await getReviewByIdFromDB(reviewId);
+
+        if (!review) {
+            return { error: 'Review not found' };
+        }
+
+        // Allow deletion if user owns the review or is an admin
+        const isOwner = review.userId === session.user.id;
+        const isAdmin = session.user.role === 'admin';
+
+        if (!isOwner && !isAdmin) {
+            return { error: 'You do not have permission to delete this review' };
+        }
+
+        await deleteReviewFromDB(reviewId);
+
+        revalidatePath(`/products/${productId}`);
+        revalidatePath('/products');
+
+        return { success: true };
+    } catch (error) {
+        console.error('[DELETE_REVIEW_ACTION_ERROR]', error);
+        return { error: 'Failed to delete review' };
+    }
+}

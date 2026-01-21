@@ -258,3 +258,15 @@ export async function deleteProductFromDB(id: string) {
     where: { id },
   });
 }
+
+export async function getReviewByIdFromDB(id: string) {
+  return prisma.review.findUnique({
+    where: { id },
+  });
+}
+
+export async function deleteReviewFromDB(id: string) {
+  return prisma.review.delete({
+    where: { id },
+  });
+}

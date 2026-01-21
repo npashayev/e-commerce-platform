@@ -50,6 +50,7 @@
       .body {
         border-left: 1px solid lightgray;
         padding-left: 2rem;
+        flex: 1;
 
         .userInfo {
           .userName {
@@ -64,6 +65,31 @@
 
         .comment {
           margin-top: 0.6rem;
+        }
+      }
+
+      .deleteBtn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0.8rem;
+        margin-left: auto;
+        align-self: flex-start;
+        opacity: 0.5;
+        transition: opacity 0.2s, color 0.2s;
+
+        &:hover {
+          opacity: 1;
+        }
+
+        &:disabled {
+          cursor: not-allowed;
+          opacity: 0.3;
+        }
+
+        .deleteIcon {
+          font-size: 1.6rem;
+          color: #dc2626;
         }
       }
     }
