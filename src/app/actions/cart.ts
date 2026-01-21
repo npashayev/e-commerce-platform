@@ -53,8 +53,9 @@ export async function getCartAction() {
     }
 
     // Transform cart items to match the expected format
-    const products = cart.items.map((item) => {
-      const discountedPrice = item.product.price * (1 - item.product.discountPercentage / 100);
+    const products = cart.items.map(item => {
+      const discountedPrice =
+        item.product.price * (1 - item.product.discountPercentage / 100);
       return {
         id: item.product.id,
         cartItemId: item.id,
@@ -68,7 +69,7 @@ export async function getCartAction() {
     });
 
     const totalPrice = parseFloat(
-      products.reduce((sum, p) => sum + p.totalPrice, 0).toFixed(2)
+      products.reduce((sum, p) => sum + p.totalPrice, 0).toFixed(2),
     );
     const totalProducts = products.length;
     const totalQuantity = products.reduce((sum, p) => sum + p.quantity, 0);
@@ -89,7 +90,7 @@ export async function getCartAction() {
 // Add item to cart
 export async function addToCartAction(
   prevState: CartActionState,
-  formData: FormData
+  formData: FormData,
 ): Promise<CartActionState> {
   try {
     const session = await getServerSession(authOptions);
@@ -128,7 +129,7 @@ export async function addToCartAction(
 // Update cart item quantity
 export async function updateCartItemAction(
   prevState: CartActionState,
-  formData: FormData
+  formData: FormData,
 ): Promise<CartActionState> {
   try {
     const session = await getServerSession(authOptions);
@@ -141,7 +142,10 @@ export async function updateCartItemAction(
     const quantityStr = formData.get('quantity') as string;
     const quantity = parseInt(quantityStr, 10);
 
-    const validationResult = updateCartItemSchema.safeParse({ cartItemId, quantity });
+    const validationResult = updateCartItemSchema.safeParse({
+      cartItemId,
+      quantity,
+    });
 
     if (!validationResult.success) {
       return {
@@ -166,7 +170,7 @@ export async function updateCartItemAction(
 // Remove item from cart
 export async function removeCartItemAction(
   prevState: CartActionState,
-  formData: FormData
+  formData: FormData,
 ): Promise<CartActionState> {
   try {
     const session = await getServerSession(authOptions);
@@ -202,7 +206,7 @@ export async function removeCartItemAction(
 // Checkout action
 export async function checkoutAction(
   prevState: CheckoutActionState,
-  formData: FormData
+  formData: FormData,
 ): Promise<CheckoutActionState> {
   try {
     const session = await getServerSession(authOptions);
@@ -237,7 +241,7 @@ export async function checkoutAction(
 
     if (!validationResult.success) {
       const fieldErrors: Record<string, string[]> = {};
-      
+
       validationResult.error.issues.forEach((issue: z.ZodIssue) => {
         const path = issue.path[0] as string;
         if (!fieldErrors[path]) {
@@ -252,10 +256,10 @@ export async function checkoutAction(
       };
     }
 
-    // In a real application, you would process payment here
-    // For this demo, we just simulate success
+    //
+    // Payment step is passed here for demo purposes
+    //
 
-    // Clear the cart after successful "checkout"
     await clearCart(session.user.id);
 
     revalidatePath('/userId/cart');
