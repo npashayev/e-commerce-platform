@@ -132,7 +132,7 @@ export async function addToCartAction(
 
     await addItemToCart(session.user.id, productId, quantity);
 
-    revalidatePath('/userId/cart');
+    revalidatePath('/me/cart');
     revalidatePath('/products');
 
     return {
@@ -175,7 +175,7 @@ export async function updateCartItemAction(
 
     await updateCartItemQuantity(cartItemId, quantity);
 
-    revalidatePath('/userId/cart');
+    revalidatePath('/me/cart');
 
     return {
       success: true,
@@ -211,7 +211,7 @@ export async function removeCartItemAction(
 
     await removeItemFromCart(cartItemId);
 
-    revalidatePath('/userId/cart');
+    revalidatePath('/me/cart');
 
     return {
       success: true,
@@ -282,7 +282,7 @@ export async function checkoutAction(
 
     await clearCart(session.user.id);
 
-    revalidatePath('/userId/cart');
+    revalidatePath('/me/cart');
 
     return {
       success: true,

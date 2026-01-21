@@ -42,13 +42,8 @@ const Navbar = () => {
 
           <div className={styles.userActionBtns}>
             <Link
-              href="/userId/cart"
-              aria-label="Cart"
-              style={{
-                color: 'inherit',
-                marginRight: '1rem',
-                fontSize: '1.2rem',
-              }}
+              href="/me/cart"
+              className={styles.cartBtn}
             >
               <FontAwesomeIcon icon={faCartShopping} />
             </Link>
@@ -61,3 +56,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+

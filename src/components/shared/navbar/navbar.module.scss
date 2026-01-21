@@ -65,6 +65,15 @@
         height: 100%;
         display: flex;
         align-items: center;
+
+        .cartBtn {
+          margin-right: 1rem;
+          font-size: 1.6rem;
+
+          &:hover {
+            color: rgb(173, 131, 23);
+          }
+        }
       }
     }
   }
