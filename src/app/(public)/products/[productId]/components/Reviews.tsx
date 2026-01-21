@@ -24,7 +24,7 @@ const Reviews = ({ productId }: Props) => {
   return (
     <div className={styles.main}>
       <h2 className={styles.heading}>Reviews & Rating</h2>
-      <ReviewForm />
+      <ReviewForm productId={productId} />
       <div className={styles.reviewsCnr}>
         {reviews ? (
           reviews.map((review, i) => (

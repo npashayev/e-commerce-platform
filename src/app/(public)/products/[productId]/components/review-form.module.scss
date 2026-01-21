@@ -41,6 +41,14 @@
 
 
 
+    .errorMessage {
+        color: #dc2626;
+        font-size: 1.4rem;
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+        padding: 0.5rem 0;
+    }
+
     .commentInput {
         flex: 1;
         resize: none;
@@ -54,6 +62,14 @@
 
         &:focus {
             border-color: #007bff;
+        }
+
+        &.commentInputError {
+            border-color: #dc2626;
+
+            &:focus {
+                border-color: #dc2626;
+            }
         }
     }
 }

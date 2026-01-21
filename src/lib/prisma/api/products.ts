@@ -167,10 +167,10 @@ export async function fetchProductsPaginated(
     ...(category && category !== 'all' && { category }),
   };
 
-  const orderBy: Prisma.ProductOrderByWithRelationInput | undefined = 
+  const orderBy: Prisma.ProductOrderByWithRelationInput | undefined =
     sortBy === 'price' ? { price: order === 'asc' ? 'asc' : 'desc' } :
-    sortBy === 'rating' ? { rating: order === 'asc' ? 'asc' : 'desc' } :
-    undefined;
+      sortBy === 'rating' ? { rating: order === 'asc' ? 'asc' : 'desc' } :
+        undefined;
 
   const total = await prisma.product.count({ where });
 
@@ -186,8 +186,8 @@ export async function fetchProductsPaginated(
 
   const hasMore = products.length > limit;
   const resultProducts = hasMore ? products.slice(0, limit) : products;
-  const nextCursor = hasMore && resultProducts.length > 0 
-    ? resultProducts[resultProducts.length - 1].id 
+  const nextCursor = hasMore && resultProducts.length > 0
+    ? resultProducts[resultProducts.length - 1].id
     : null;
 
   return {
@@ -208,6 +208,28 @@ export async function fetchReviewsByProductIdFromDB(productId: string) {
   return prisma.review.findMany({
     where: { productId },
     orderBy: { date: 'desc' }, // latest reviews first
+  });
+}
+
+export async function createReviewForProductInDB(input: {
+  productId: string;
+  userId: string;
+  rating: number;
+  comment: string;
+  reviewerName: string;
+  reviewerEmail: string;
+  date: string;
+}) {
+  return prisma.review.create({
+    data: {
+      product: { connect: { id: input.productId } },
+      user: { connect: { id: input.userId } },
+      rating: input.rating,
+      comment: input.comment,
+      reviewerName: input.reviewerName,
+      reviewerEmail: input.reviewerEmail,
+      date: input.date,
+    },
   });
 }
 
