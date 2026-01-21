@@ -10,6 +10,7 @@ import { useState } from 'react';
 import AiReviewModal from './AiReviewModal';
 import useBodyScrollLock from '@/lib/hooks/useBodyScrollLock';
 import { features } from '@/lib/config/features';
+import AddToCartButton from './AddToCartButton';
 
 interface Props {
   product: Product;
@@ -78,6 +79,10 @@ const ProductInfoHeading = ({ product }: Props) => {
         <div className={styles.priceCnr}>
           {discountPercentage > 0 && <span className={styles.oldPrice}>${product.price}</span>}
           <span className={styles.newPrice}>${newPrice}</span>
+        </div>
+
+        <div className={styles.buttonsCnr}>
+          <AddToCartButton productId={product.id} />
         </div>
       </div>
     </>
