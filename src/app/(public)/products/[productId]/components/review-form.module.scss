@@ -1,0 +1,59 @@
+.reviewForm {
+    border-bottom: 1px solid lightgray;
+    padding-bottom: 3rem;
+    margin-bottom: 3rem;
+
+    .ratingCnr {
+        display: flex;
+        justify-content: flex-end;
+        gap: 1.2rem;
+        padding: 1.6rem 0;
+        align-items: center;
+
+        .starsCnr {
+            display: flex;
+            gap: 0.2rem;
+
+            .star {
+                height: 1.6rem;
+                cursor: pointer;
+                transition: color 0.1s ease;
+            }
+
+            .filled {
+                color: gold;
+            }
+        }
+
+        .addReviewBtn {
+            padding: 0.8rem 1.6rem;
+            border-radius: 0.8rem;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+
+            &:hover {
+                background-color: #0056b3;
+            }
+        }
+    }
+
+
+
+    .commentInput {
+        flex: 1;
+        resize: none;
+        width: 100%;
+        padding: 1rem;
+        border: 1px solid lightgray;
+        border-radius: 0.5rem;
+        font-size: 1.6rem;
+        outline: none;
+        margin-top: 1rem;
+
+        &:focus {
+            border-color: #007bff;
+        }
+    }
+}

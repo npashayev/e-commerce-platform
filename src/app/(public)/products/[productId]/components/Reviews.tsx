@@ -3,6 +3,7 @@ import styles from './reviews.module.scss';
 import star from '@/assets/star.png';
 import { use } from 'react';
 import { getReviewsByProductId } from '@/lib/api/products';
+import ReviewForm from './ReviewForm';
 
 interface Props {
   productId: string;
@@ -22,7 +23,8 @@ const Reviews = ({ productId }: Props) => {
 
   return (
     <div className={styles.main}>
-      <div className={styles.heading}>Reviews & Rating</div>
+      <h2 className={styles.heading}>Reviews & Rating</h2>
+      <ReviewForm />
       <div className={styles.reviewsCnr}>
         {reviews ? (
           reviews.map((review, i) => (
