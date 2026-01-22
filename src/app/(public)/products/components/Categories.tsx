@@ -1,9 +1,8 @@
-import React from 'react';
 import styles from './categories.module.scss';
 import CategoriesContent from './CategoriesContent';
 import { use } from 'react';
 import { getCategories } from '@/lib/api/products';
-import { Category } from '@prisma/client';
+import type { Category } from '@prisma/client';
 
 interface Props {
   category?: string;

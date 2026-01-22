@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Product } from "@prisma/client";
+import type { Product } from "@prisma/client";
 import { getAiReviewForProduct } from "@/app/actions/ai/getReviewForProduct";
 import { useLocalStorage } from "./useLocalStorage";
 

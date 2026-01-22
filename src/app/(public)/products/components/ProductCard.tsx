@@ -3,7 +3,7 @@ import styles from './product-card.module.scss';
 import star from '@/assets/star.png';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Product } from '@prisma/client';
+import type { Product } from '@prisma/client';
 import useSlideshow from '@/lib/hooks/useSlideShow';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {

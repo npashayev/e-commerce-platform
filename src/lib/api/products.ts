@@ -1,4 +1,4 @@
-import { Category, Product, Review } from '@prisma/client';
+import type { Category, Product, Review } from '@prisma/client';
 import { apiFetch } from './apiFetch';
 import apiClient from './apiClient';
 

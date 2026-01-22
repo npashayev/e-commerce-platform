@@ -91,7 +91,7 @@ export async function getCartAction() {
 
 // Add item to cart
 export async function addToCartAction(
-  prevState: CartActionState,
+  _prevState: CartActionState,
   formData: FormData,
 ): Promise<CartActionState> {
   try {
@@ -148,7 +148,7 @@ export async function addToCartAction(
 
 // Update cart item quantity
 export async function updateCartItemAction(
-  prevState: CartActionState,
+  _prevState: CartActionState,
   formData: FormData,
 ): Promise<CartActionState> {
   try {
@@ -189,7 +189,7 @@ export async function updateCartItemAction(
 
 // Remove item from cart
 export async function removeCartItemAction(
-  prevState: CartActionState,
+  _prevState: CartActionState,
   formData: FormData,
 ): Promise<CartActionState> {
   try {
@@ -225,7 +225,7 @@ export async function removeCartItemAction(
 
 // Checkout action
 export async function checkoutAction(
-  prevState: CheckoutActionState,
+  _prevState: CheckoutActionState,
   formData: FormData,
 ): Promise<CheckoutActionState> {
   try {

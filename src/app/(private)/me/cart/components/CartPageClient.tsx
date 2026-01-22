@@ -71,6 +71,7 @@ export default function CartPageClient({
       }, 5000);
       return () => clearTimeout(timer);
     }
+    return undefined;
   }, [showDemoNotice]);
 
   return (

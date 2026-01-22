@@ -1,4 +1,4 @@
-import { Product } from '@prisma/client';
+import type { Product } from '@prisma/client';
 import AdditionalInfo from './AdditionalInfo';
 import styles from './product-info.module.scss';
 

@@ -1,6 +1,6 @@
 'use server';
 import { gemini } from "@/lib/ai/gemini";
-import { Product } from "@prisma/client";
+import type { Product } from "@prisma/client";
 import { AI_PRODUCT_REVIEW_PROMPT } from "@/lib/constants/prompts";
 import { features } from "@/lib/config/features";
 

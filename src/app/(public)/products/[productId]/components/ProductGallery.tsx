@@ -5,7 +5,7 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { useState, useRef } from 'react';
 import { useSwipeable } from 'react-swipeable';
-import { Product } from '@prisma/client';
+import type { Product } from '@prisma/client';
 import Image from 'next/image';
 
 interface Props {
@@ -79,7 +79,7 @@ const ProductGallery = ({ product }: Props) => {
           <FontAwesomeIcon icon={faArrowLeft} className={styles.arrowIcon} />
         </button>
         <div ref={thumbnailsRef} className={styles.thumbnailsContainer}>
-          {product.images?.map((image, i) => (
+          {product.images?.map((image: string, i: number) => (
             <div
               key={i}
               className={`${styles.thumbnailWrp} ${i == activeImageIndex ? styles.activeThumbnailWrp : ''}`}

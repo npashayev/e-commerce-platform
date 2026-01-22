@@ -4,7 +4,7 @@ import styles from './product-info-heading.module.scss';
 import star from '@/assets/star.png';
 import { faHexagonNodes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Product } from '@prisma/client';
+import type { Product } from '@prisma/client';
 import Image from 'next/image';
 import { useState } from 'react';
 import AiReviewModal from './AiReviewModal';

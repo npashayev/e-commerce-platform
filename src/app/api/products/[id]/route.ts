@@ -20,7 +20,7 @@ interface Params {
   params: Promise<{ id: string }>;
 }
 
-export async function GET(req: Request, { params }: Params) {
+export async function GET(_req: Request, { params }: Params) {
   const { id } = await params;
 
   if (!id) {
@@ -188,7 +188,7 @@ export async function PATCH(
 }
 
 export async function DELETE(
-  request: NextRequest,
+  _request: NextRequest,
   context: { params: Promise<{ id: string }> },
 ) {
   try {

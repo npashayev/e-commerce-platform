@@ -5,7 +5,7 @@ import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { createReviewSchema } from '@/lib/validators/reviews';
 import { createReviewForProductInDB } from '@/lib/prisma/api/products';
 
-export async function GET(req: Request, { params }: { params: Promise<{ productId: string }> }) {
+export async function GET(_req: Request, { params }: { params: Promise<{ productId: string }> }) {
   const { productId } = await params;
 
   try {

@@ -38,7 +38,7 @@ interface AddProductState {
 }
 
 export async function updateProductAction(
-  prevState: UpdateProductState,
+  _prevState: UpdateProductState,
   formData: FormData,
 ): Promise<UpdateProductState> {
   try {
@@ -284,7 +284,7 @@ export async function updateProductAction(
 }
 
 export async function addProductAction(
-  prevState: AddProductState,
+  _prevState: AddProductState,
   formData: FormData,
 ): Promise<AddProductState> {
   try {
