@@ -8,9 +8,6 @@ export const metadata = {
 };
 
 export default async function CartPage() {
-    // No need for session check here as middleware handles it
-    // and no dynamic params to handle
-
     const cartData = await getCartAction();
 
     return (

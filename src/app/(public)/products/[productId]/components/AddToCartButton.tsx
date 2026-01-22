@@ -23,6 +23,7 @@ export default function AddToCartButton({ productId }: AddToCartButtonProps) {
 
   useEffect(() => {
     if (state.success) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setShowSuccess(true);
       const timer = setTimeout(() => {
         setShowSuccess(false);

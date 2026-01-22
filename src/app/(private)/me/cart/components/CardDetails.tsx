@@ -1,6 +1,6 @@
 'use client';
 
-import { forwardRef, useActionState, useEffect, useState } from 'react';
+import { forwardRef, useActionState, useEffect, useState, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import styles from './card-details.module.scss';
@@ -17,6 +17,7 @@ interface CardDetailsProps {
 const CardDetails = forwardRef<HTMLInputElement, CardDetailsProps>(
   ({ totalPrice, totalProducts, totalQuantity, onCheckoutSuccess }, ref) => {
     const router = useRouter();
+    const formRef = useRef<HTMLFormElement>(null);
 
     const [formData, setFormData] = useState({
       cardholderName: '',
@@ -38,6 +39,7 @@ const CardDetails = forwardRef<HTMLInputElement, CardDetailsProps>(
     useEffect(() => {
       if (state.success) {
         alert(state.message || 'Order placed successfully!');
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setFormData({
           cardholderName: '',
           cardNumber: '',
@@ -113,7 +115,7 @@ const CardDetails = forwardRef<HTMLInputElement, CardDetailsProps>(
       <div className={styles.main}>
         <div className={styles.header}>Card Details</div>
 
-        <form className={styles.form} onSubmit={handleSubmit}>
+        <form ref={formRef} className={styles.form} onSubmit={handleSubmit}>
           <div className={styles.inputCnr}>
             <label htmlFor="cardholderName">Name on card</label>
             <input
