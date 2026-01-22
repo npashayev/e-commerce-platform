@@ -13,7 +13,7 @@ export function useLocalStorage<T>(key: string, defaultValue: T) {
                 setValue(JSON.parse(stored) as T);
             }
         } catch (err) {
-            console.error(`Failed to parse localStorage key "${key}"`);
+            console.error(`Failed to parse localStorage key "${key}":`, err);
         }
         setIsInitialized(true);
     }, [key]);
@@ -23,7 +23,7 @@ export function useLocalStorage<T>(key: string, defaultValue: T) {
         try {
             localStorage.setItem(key, JSON.stringify(value));
         } catch (err) {
-            console.error(`Failed to write localStorage key "${key}"`);
+            console.error(`Failed to write localStorage key "${key}":`, err);
         }
     }, [key, value, isInitialized]);
 
