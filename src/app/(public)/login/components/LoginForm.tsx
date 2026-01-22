@@ -4,7 +4,7 @@ import styles from '@/styles/login-register-form.module.scss';
 import Link from 'next/link';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { signIn, getSession } from 'next-auth/react';
 import { useAppDispatch } from '@/lib/hooks/useRedux';
 import { setUser } from '@/lib/store/slices/userSlice';
@@ -17,7 +17,10 @@ const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState<{ email?: string; password?: string; general?: string }>({});
   const router = useRouter();
+  const searchParams = useSearchParams();
   const dispatch = useAppDispatch();
+
+  const callbackUrl = searchParams.get('callbackUrl') || '/';
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -33,6 +36,7 @@ const LoginForm = () => {
         email,
         password,
         redirect: false,
+        callbackUrl,
       });
 
       if (result?.error) {
@@ -54,7 +58,7 @@ const LoginForm = () => {
         }
 
         toast.success('Logged in successfully!');
-        router.push('/');
+        router.push(callbackUrl);
         router.refresh();
       }
     } catch {
