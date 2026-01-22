@@ -2,6 +2,8 @@ import styles from './components/cart-page.module.scss';
 import { getCartAction } from '@/app/actions/cart';
 import CartPageClient from './components/CartPageClient';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata = {
     title: 'Shopping Cart',
     description: 'View and manage your shopping cart',
