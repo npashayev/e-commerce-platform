@@ -1,9 +1,12 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  /* config options here */
   reactCompiler: true,
+
+  reactStrictMode: true,
+
   images: {
+    formats: ['image/avif', 'image/webp'],
     remotePatterns: [
       {
         protocol: 'https',
@@ -17,6 +20,10 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+
+  compress: true,
+
+  poweredByHeader: false,
 };
 
 export default nextConfig;
