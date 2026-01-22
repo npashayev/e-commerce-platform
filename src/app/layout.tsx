@@ -7,6 +7,8 @@ import Navbar from '@/components/shared/navbar/Navbar';
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { SITE_NAME, SITE_DESCRIPTION, SITE_KEYWORDS } from '@/lib/constants/seo';
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 config.autoAddCss = false;
 
@@ -63,6 +65,8 @@ export default function RootLayout({
             }}
           />
         </Providers>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
