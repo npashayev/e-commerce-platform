@@ -14,7 +14,7 @@ import {
 // Dynamically import react-select to disable SSR
 const Select = dynamic(() => import('react-select'), { ssr: false });
 import Image from 'next/image';
-import { Category } from '@prisma/client';
+import type { Category } from '@prisma/client';
 import { EditField } from '@/components/shared/FormField';
 import { addProductAction } from '@/app/actions/product';
 import { useCloudinaryUpload } from '@/lib/hooks/useCloudinaryUpload';

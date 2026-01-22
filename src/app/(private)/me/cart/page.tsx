@@ -1,6 +1,3 @@
-import { redirect } from 'next/navigation';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import styles from './components/cart-page.module.scss';
 import { getCartAction } from '@/app/actions/cart';
 import CartPageClient from './components/CartPageClient';
@@ -11,9 +8,6 @@ export const metadata = {
 };
 
 export default async function CartPage() {
-    // No need for session check here as middleware handles it
-    // and no dynamic params to handle
-
     const cartData = await getCartAction();
 
     return (

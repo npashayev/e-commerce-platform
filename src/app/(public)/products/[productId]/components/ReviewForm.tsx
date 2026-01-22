@@ -44,6 +44,7 @@ const ReviewForm = ({ productId }: Props) => {
             }, 100);
             return () => clearTimeout(timer);
         }
+        return undefined;
     }, [state?.success]);
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {

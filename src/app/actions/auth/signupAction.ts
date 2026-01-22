@@ -6,7 +6,7 @@ import { Prisma } from '@prisma/client';
 import { registerSchema } from '@/lib/validators/auth';
 import { AuthActionState } from '@/lib/types/auth';
 
-export async function signupAction(prevState: AuthActionState, formData: FormData): Promise<AuthActionState> {
+export async function signupAction(_prevState: AuthActionState, formData: FormData): Promise<AuthActionState> {
   const firstName = formData.get('firstName');
   const lastName = formData.get('lastName');
   const email = formData.get('email');

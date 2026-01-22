@@ -1,6 +1,6 @@
 import styles from '@/styles/resource-form.module.scss';
 import { InfoField } from '@/components/shared/FormField';
-import { Product } from '@prisma/client';
+import type { Product } from '@prisma/client';
 import Image from 'next/image';
 
 interface Props {
@@ -88,7 +88,7 @@ const ProductInfoReadOnly = ({ product, onOpen }: Props) => {
         <div className={styles.heading}>Images</div>
 
         <div className={styles.imageList}>
-          {product.images.map((image, index) => (
+          {product.images.map((image: string, index: number) => (
             <div key={index} className={styles.imageCnr}>
               <Image src={image} alt="image" className={styles.image} fill />
             </div>

@@ -31,6 +31,7 @@ export default function AddToCartButton({ productId }: AddToCartButtonProps) {
       }, 2000);
       return () => clearTimeout(timer);
     }
+    return undefined;
   }, [state.success, state.timestamp]);
 
   useEffect(() => {

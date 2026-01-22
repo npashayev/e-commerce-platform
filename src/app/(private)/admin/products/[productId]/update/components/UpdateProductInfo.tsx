@@ -12,7 +12,7 @@ import {
 } from 'react';
 import Select from 'react-select';
 import Image from 'next/image';
-import { Category, Product } from '@prisma/client';
+import type { Category, Product } from '@prisma/client';
 import { EditField } from '@/components/shared/FormField';
 import { updateProductAction } from '@/app/actions/product';
 import { useCloudinaryUpload } from '@/lib/hooks/useCloudinaryUpload';

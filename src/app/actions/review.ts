@@ -18,7 +18,7 @@ export interface CreateReviewState {
 }
 
 export async function createReviewAction(
-    prevState: CreateReviewState | null,
+    _prevState: CreateReviewState | null,
     formData: FormData,
 ): Promise<CreateReviewState> {
     try {

@@ -1,7 +1,7 @@
 'use client';
 import { PrivateComponent } from '@/components/shared/PrivateComponent';
 import styles from '@/styles/product-actions.module.scss';
-import { Product } from '@prisma/client';
+import type { Product } from '@prisma/client';
 import Link from 'next/link';
 import { deleteProductAction } from '@/app/actions/product';
 import { useTransition } from 'react';
