@@ -20,7 +20,20 @@
     ],
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    
+    /* Strict Type-Checking Options (Matches GitHub CI) */
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true
   },
   "include": [
     "next-env.d.ts",
