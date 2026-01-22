@@ -5,10 +5,7 @@ import { NextRequest } from 'next/server';
 // Routes that require admin/moderator role
 const adminRoutes = ['/admin'];
 
-// Routes that require authentication only (any logged-in user)
-const userRoutes = ['/cart'];
-
-export async function middleware(req: NextRequest) {
+export async function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
   // Get the JWT token from the request
