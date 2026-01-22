@@ -1,5 +1,5 @@
 'use client';
-import { Product } from '@prisma/client';
+import type { Product } from '@prisma/client';
 import styles from './additional-info.module.scss';
 import { useState } from 'react';
 

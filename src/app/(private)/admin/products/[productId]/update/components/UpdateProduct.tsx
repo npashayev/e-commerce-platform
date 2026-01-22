@@ -2,7 +2,7 @@
 import styles from '@/styles/resource-form.module.scss';
 import ProductInfoReadOnly from './ProductInfoReadOnly';
 import { useState } from 'react';
-import { Category, Product } from '@prisma/client';
+import type { Category, Product } from '@prisma/client';
 import UpdateProductInfo from './UpdateProductInfo';
 
 interface Props {
