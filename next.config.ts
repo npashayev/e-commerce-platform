@@ -37,6 +37,9 @@ const nextConfig: NextConfig = {
           // Prevent MIME sniffing
           { key: 'X-Content-Type-Options', value: 'nosniff' },
           
+          // XSS Protection for older browsers
+          { key: 'X-XSS-Protection', value: '1; mode=block' },
+          
           // Referrer policy
           { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
           
