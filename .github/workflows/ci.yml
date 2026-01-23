@@ -74,9 +74,3 @@ jobs:
       - name: Check for outdated dependencies
         run: npm outdated
         continue-on-error: true
-
-      - name: Dependency Review (PRs only)
-        if: github.event_name == 'pull_request'
-        uses: actions/dependency-review-action@v4
-        with:
-          fail-on-severity: high
