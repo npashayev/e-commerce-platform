@@ -13,8 +13,6 @@ import {
 import { Prisma } from '@prisma/client';
 import { revalidatePath } from 'next/cache';
 
-// Cache GET requests for 1 hour
-export const revalidate = 3600;
 
 interface Params {
   params: Promise<{ id: string }>;

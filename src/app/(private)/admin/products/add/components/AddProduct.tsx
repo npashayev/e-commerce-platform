@@ -18,6 +18,7 @@ import type { Category } from '@prisma/client';
 import { EditField } from '@/components/shared/FormField';
 import { addProductAction } from '@/app/actions/product';
 import { useCloudinaryUpload } from '@/lib/hooks/useCloudinaryUpload';
+import { useInvalidateProducts } from '@/lib/hooks/useInvalidateProducts';
 import toast from 'react-hot-toast';
 
 interface Props {
@@ -35,6 +36,7 @@ const AddProduct = ({ categories }: Props) => {
   const { uploadImages, isUploading } = useCloudinaryUpload();
   const [state, formAction] = useActionState(addProductAction, {});
   const formRef = useRef<HTMLFormElement>(null);
+  const { invalidateAllProductData } = useInvalidateProducts();
 
   const categoryOptions = categories.map(cat => ({
     value: cat.slug,
@@ -56,7 +58,16 @@ const AddProduct = ({ categories }: Props) => {
       formData.set('images', JSON.stringify(finalImageUrls));
 
       startTransition(async () => {
-        await formAction(formData);
+        try {
+          await formAction(formData);
+          invalidateAllProductData();
+        } catch (error) {
+          if (error instanceof Error && error.message === 'NEXT_REDIRECT') {
+            invalidateAllProductData();
+            throw error;
+          }
+          throw error;
+        }
       });
     } catch (error) {
       console.error('Upload failed during submission:', error);

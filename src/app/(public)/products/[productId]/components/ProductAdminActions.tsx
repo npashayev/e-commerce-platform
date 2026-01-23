@@ -5,6 +5,7 @@ import type { Product } from '@prisma/client';
 import Link from 'next/link';
 import { deleteProductAction } from '@/app/actions/product';
 import { useTransition } from 'react';
+import { useInvalidateProducts } from '@/lib/hooks/useInvalidateProducts';
 import toast from 'react-hot-toast';
 
 interface Props {
@@ -13,6 +14,7 @@ interface Props {
 
 const ProductAdminActions = ({ product }: Props) => {
     const [isPending, startTransition] = useTransition();
+    const { invalidateAllProductData } = useInvalidateProducts();
 
     const handleDelete = async () => {
         if (!confirm(`Are you sure you want to delete "${product.title}"? This action cannot be undone.`)) {
@@ -22,8 +24,9 @@ const ProductAdminActions = ({ product }: Props) => {
         startTransition(async () => {
             try {
                 await deleteProductAction(product.id);
+                // Invalidate React Query cache after successful deletion
+                invalidateAllProductData();
             } catch (error) {
-                // Don't show error toast for NEXT_REDIRECT (successful redirect)
                 if (!(error instanceof Error && error.message === 'NEXT_REDIRECT')) {
                     toast.error('Failed to delete product');
                     console.error('Delete error:', error);

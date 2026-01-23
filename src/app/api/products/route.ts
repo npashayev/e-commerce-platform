@@ -9,10 +9,8 @@ import {
 import { Prisma } from '@prisma/client';
 import { revalidatePath } from 'next/cache';
 
-// Cache GET requests for 1 hour
-export const revalidate = 3600;
 
-const DEFAULT_INITIAL_LIMIT = 50;
+const DEFAULT_INITIAL_LIMIT = 30;
 const DEFAULT_PAGE_LIMIT = 30;
 
 export async function GET(request: Request) {
